@@ -18,4 +18,9 @@ a:hover {
 
 .content ul {
   @apply my-6;
+  @apply mx-5;
+
+
 }
+
+
