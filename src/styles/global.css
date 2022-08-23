@@ -1,5 +1,6 @@
+@import 'react-phone-number-input/style.css'
 @tailwind base;
-@import "test.css";
+
 a {
   @apply text-blue-700;
 }
@@ -48,9 +49,19 @@ a:hover {
 
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
   opacity: 1;
-    transform: none !important;
-    transition: none !important ;
+    transform: inherit !important;
+    transition: inherit !important ;
     top: 286px !important;
     height:300px;
-    transform-origin: 0px 265.878px;
+    left:0 !important;
+    right:0 !important;
+    margin:auto !important;
+    max-width:300px;
+    transform-origin: inherit !important;
+}
+
+
+.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root{
+
+z-index:10000 !important;
 }

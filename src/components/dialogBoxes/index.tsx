@@ -36,7 +36,7 @@ const ModalWrapper: React.Fc = (props: any) => {
         footer={null}
         // centered={true}
         focusTriggerAfterClose={true}
-        // zIndex={9999}
+        zIndex={9999}
         width={modalSize[size]}
       >
         {children}
