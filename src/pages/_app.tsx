@@ -1,12 +1,12 @@
 import '../styles/global.css';
+import 'antd/dist/antd.css';
 
 import type { AppProps } from 'next/app';
 
-// import { wrapper } from '../redux';
+import { wrapper } from '../redux/store';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Component {...pageProps} />
 );
-export default MyApp;
 
-// export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(MyApp);

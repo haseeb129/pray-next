@@ -1,24 +1,18 @@
 // import { newRequest } from '../../helpers/common';
-import * as actionType from './types.js';
-import { urls } from './urls';
+import type { ReduxInterface } from '@/helper/common.js';
 
-interface ReduxInterface {
-  method: string;
-  url: string;
-  headers?: any;
-}
+import { newRequest } from '../../helper/common';
+import * as actionType from './types';
+import { urls } from './urls';
 
 export function getCustomers(queryParams: string) {
   const requestObject: ReduxInterface = {
     method: 'GET',
     url: urls.getCustomers(queryParams),
-    // headers: {
-    //   Authorization: "Bearer " + window.accessToken,
-    // },
   };
 
   return {
     type: actionType.GET_CUSTOMERS,
-    payload: requestObject,
+    payload: newRequest(requestObject),
   };
 }

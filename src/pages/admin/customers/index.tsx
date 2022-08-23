@@ -1,5 +1,4 @@
-import Button from '@material-ui/core/Button';
-
+import Customers from '@/containers/customers';
 import DashboardHOC from '@/hoc/dashboard';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 
@@ -11,9 +10,7 @@ const customers = () => {
       canonical="this is canonical "
     >
       <DashboardHOC>
-        <Button color="primary" variant="contained">
-          Click Me
-        </Button>
+        <Customers />
       </DashboardHOC>
     </MetaTagWarpper>
   );
