@@ -2,7 +2,7 @@ import Auth from '@/components/auth';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 import WebHOC from '@/hoc/web';
 
-const about = () => {
+const signIn = () => {
   return (
     <MetaTagWarpper
       title="Customer page"
@@ -16,4 +16,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default signIn;

@@ -1,3 +1,7 @@
+import SearchIcon from '@mui/icons-material/Search';
+import { InputLabel, OutlinedInput } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import { MuiTelInput } from 'mui-tel-input';
 import React from 'react';
@@ -23,6 +27,27 @@ const CInputFiled = (props: any) => {
     );
   };
 
+  const searchInput = () => {
+    return (
+      <FormControl variant="outlined" size={size}>
+        <InputLabel>Search</InputLabel>
+        <OutlinedInput
+          type={'text'}
+          value={value}
+          size={size}
+          onChange={(event) =>
+            handleChange(event.target.name, event.target.value)
+          }
+          endAdornment={
+            <InputAdornment position="end">
+              <SearchIcon fill="" />
+            </InputAdornment>
+          }
+          label="Search"
+        />
+      </FormControl>
+    );
+  };
   const phoneInput = () => {
     return (
       <MuiTelInput
@@ -44,6 +69,9 @@ const CInputFiled = (props: any) => {
 
       case inputTypes.PHONE:
         return phoneInput();
+
+      case inputTypes.SEARCH:
+        return searchInput();
 
       default:
         return null;

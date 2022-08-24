@@ -1,0 +1,77 @@
+.guest-signIn-page-wrapper {
+  align-items: start;
+  display: flex;
+  justify-content: center;
+  height: 86vh;
+  background-image: url("https://www.istockphoto.com/photos/earth-sun.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.signIn-page-inner-wrapper {
+  width:100%;
+  max-width: 456px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.forget-pass-wrap {
+  padding: 10px 5px 20px 0px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.heading-top {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  display: block;
+  padding-bottom: 20px;
+  color: #091C22;
+}
+
+ .sign-up-button {
+  min-width: 100%;
+}
+
+ button.sign-up-button {
+  border: none;
+  border-radius: 5px;
+  padding: 12px 0px;
+  font-weight: 600;
+  color: white;
+  background-color: #f31c23;
+  &:hover {
+    background: #cc0d14 !important;
+  }
+  &:active {
+    box-shadow: 0px 0px 15px #7c050559 !important;
+  }
+}
+
+.logo {
+  text-align: center;
+
+  svg {
+    width: 140px;
+    height: auto;
+  }
+}
+
+.forget-password {
+  color: gray;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.signUp {
+  text-align: center;
+  & span {
+    color: #f31c23;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+

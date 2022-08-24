@@ -1,8 +1,8 @@
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -11,11 +11,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { Divider } from 'antd';
 import Link from 'next/link';
 import * as React from 'react';
 
 import { panelSideBar } from '@/helper/dashboard';
+
+import styles from './index.module.scss';
 
 const drawerWidth = 240;
 
@@ -32,9 +34,25 @@ export default function DashboardHOC(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const classesss = {
+    backgroundColor: '#1976d2',
+    // padding: '15px 35px',
+  };
+
+  const titleClasses = {
+    fontSize: '24px',
+    fontWeight: '600',
+    paddingLeft: '25px',
+    color: '#fff',
+  };
+
   const drawer = (
-    <div>
-      <Toolbar />
+    <div className={styles.customToolbar}>
+      {/* <AppBar position="fixed"> */}
+      <Toolbar style={{ ...classesss }} disableGutters={true}>
+        <span style={{ ...titleClasses }}>PRAY</span>
+      </Toolbar>
+      {/* </AppBar> */}
       <Divider />
       <List>
         {panelSideBar.map((item, index) => (
@@ -73,10 +91,18 @@ export default function DashboardHOC(props: Props) {
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
+            <span style={{ ...titleClasses }}>PRAY</span>
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={() => {}}
+          >
+            <span className="pr-3">LogOut</span>
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box

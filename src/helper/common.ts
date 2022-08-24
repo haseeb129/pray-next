@@ -37,4 +37,5 @@ export const inputTypes = {
   TEXT: 'text',
   PHONE: 'phone',
   PASSWORD: 'password',
+  SEARCH: 'search',
 };

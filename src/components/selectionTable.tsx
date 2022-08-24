@@ -120,31 +120,31 @@ const headCells: readonly HeadCell[] = [
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'NAME',
   },
   {
     id: 'calories',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'EMAIL',
   },
   {
     id: 'fat',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'TELEPHONE',
   },
   {
     id: 'carbs',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'CELULAR',
   },
   {
     id: 'protein',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'REGISTRO',
   },
 ];
 
@@ -432,11 +432,12 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+        <FormControl variant="outlined" size="small">
           <InputLabel>Search</InputLabel>
           <OutlinedInput
             type={'text'}
             value={searched}
+            size="small"
             onChange={requestSearch}
             endAdornment={
               <InputAdornment position="end">
@@ -446,7 +447,7 @@ export default function EnhancedTable() {
             label="Search"
           />
         </FormControl>
-
+        <br />
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
