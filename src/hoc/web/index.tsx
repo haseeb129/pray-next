@@ -14,6 +14,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 
+import styles from './index.module.scss';
+
 interface Props {
   window?: () => Window;
   children: React.ReactNode;
@@ -68,8 +70,8 @@ export default function DrawerAppBar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Container maxWidth="xl">
-      <Box sx={{ bgcolor: '#cfe8fc', minHeight: '100vh' }}>
+    <Container maxWidth="xl" className="p-0">
+      <Box>
         <AppBar component="nav">
           <Container maxWidth="xl">
             <Toolbar style={{ ...classes1 }}>
@@ -119,9 +121,11 @@ export default function DrawerAppBar(props: Props) {
             {drawer}
           </Drawer>
         </Box>
-        <Box component="main" sx={{ p: 3 }}>
-          <Toolbar />
-          {/* asas */}
+        <Box
+          component="main"
+          sx={{ p: 3 }}
+          className={styles['main-component']}
+        >
           {props.children}
         </Box>
       </Box>

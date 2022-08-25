@@ -1,9 +1,5 @@
-// import YahudaLogo from "../../public/static/img/yahuda-logo.svg";
-// import { default as GoogleLogin } from "../socialLogin/google/login";
-// import { default as FacebookLogin } from "../socialLogin/facebook/login";
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import { inputTypes } from '@/helper/common';
@@ -11,16 +7,12 @@ import { inputTypes } from '@/helper/common';
 import CInputFiled from '../input';
 import styles from './index.module.scss';
 
-const signinGuestView = (props) => {
-  const { state, handleChange, handleSignInRequest } = props;
-  const router = useRouter();
+const signInUser = (props) => {
+  const { handleChange, handleSignInRequest } = props;
 
   return (
     <div className={styles['guest-signIn-page-wrapper']}>
       <div className={styles['signIn-page-inner-wrapper']}>
-        {/* <div className="logo">
-           <Link href="/web"><a>< YahudaLogo width={105} height={139} /></a></Link>
-         </div> */}
         <div className={styles.logo}>
           <PersonPinIcon fontSize="large" />
         </div>
@@ -47,7 +39,11 @@ const signinGuestView = (props) => {
             />
           </div>
           <div className={styles['forget-pass-wrap']}>
-            <span className={styles['forget-password']}>Forgot Password</span>
+            <span className={styles['forget-password']}>
+              <Link href="/auth/forgetPassword">
+                <span className="sign-up-txt"> Forgot Password</span>
+              </Link>
+            </span>
           </div>
           <div className="">
             <button
@@ -61,7 +57,7 @@ const signinGuestView = (props) => {
           <div>
             <p className={`${styles['forget-password']} ${styles.signUp}`}>
               Don't have an account?
-              <Link href="/authentication/signUp">
+              <Link href="/auth/signUp">
                 <a>
                   <span className="sign-up-txt"> Sign Up</span>
                 </a>
@@ -73,4 +69,4 @@ const signinGuestView = (props) => {
     </div>
   );
 };
-export default signinGuestView;
+export default signInUser;

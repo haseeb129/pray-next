@@ -1,8 +1,9 @@
-import Auth from '@/components/auth';
+import Auth from '@/containers/auth';
+import { componentNames } from '@/helper/auth';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 import WebHOC from '@/hoc/web';
 
-const signIn = () => {
+const signIn = (props: any) => {
   return (
     <MetaTagWarpper
       title="Customer page"
@@ -10,7 +11,7 @@ const signIn = () => {
       canonical="this is canonical "
     >
       <WebHOC>
-        <Auth />
+        <Auth props={props} componentName={componentNames.SIGNIN} />
       </WebHOC>
     </MetaTagWarpper>
   );

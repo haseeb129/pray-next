@@ -1,4 +1,4 @@
-import Auth from '@/components/auth';
+import Auth from '@/components/auth/signIn';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 import WebHOC from '@/hoc/web';
 
