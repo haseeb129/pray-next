@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 import CButton from '@/components/button';
 import CInputFiled from '@/components/input';
-import { customerState } from '@/helper/addCustomer';
 import { inputTypes } from '@/helper/common';
+import { customerState } from '@/helper/customers/addCustomer';
 
 const AddCustomer = (props: any) => {
   const { onAddCustomer, toggleModal } = props;

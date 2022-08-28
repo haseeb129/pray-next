@@ -1,6 +1,6 @@
-import Auth from '@/components/auth/signIn';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 import WebHOC from '@/hoc/web';
+import Auth from '@/components/auth';
 
 const about = () => {
   return (

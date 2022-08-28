@@ -6,7 +6,7 @@ import { inputTypes } from '@/helper/common';
 import CInputFiled from '../input';
 import styles from './index.module.scss';
 
-const forgetPassword = (props) => {
+const forgetPassword = (props: any) => {
   const { handleChange, handleSignInRequest } = props;
 
   return (
@@ -20,11 +20,11 @@ const forgetPassword = (props) => {
         <div className="flex flex-col ">
           <div className="py-2">
             <CInputFiled
-              type={inputTypes.TEXT}
+              type={inputTypes.EMAIL}
               handleChange={handleChange}
               value={''}
-              name="text"
-              label="text"
+              name="email"
+              label="Email"
             />
           </div>
 

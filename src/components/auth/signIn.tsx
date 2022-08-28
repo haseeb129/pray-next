@@ -1,15 +1,32 @@
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { inputTypes } from '@/helper/common';
 
 import CInputFiled from '../input';
 import styles from './index.module.scss';
 
-const signInUser = (props) => {
-  const { handleChange, handleSignInRequest } = props;
+export interface SignInStateInterfacr {
+  email: string;
+  password: string;
+}
 
+const signInUser = (props: any) => {
+  const { onSignInUser } = props;
+
+  const [info, setInfo] = useState<SignInStateInterfacr>({
+    email: '',
+    password: '',
+  });
+
+  const handleLocalSubmit = () => {
+    onSignInUser(info);
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setInfo({ ...info, [name]: value });
+  };
   return (
     <div className={styles['guest-signIn-page-wrapper']}>
       <div className={styles['signIn-page-inner-wrapper']}>
@@ -21,21 +38,21 @@ const signInUser = (props) => {
         <div className="flex flex-col ">
           <div className="py-2">
             <CInputFiled
-              type={inputTypes.TEXT}
+              type={inputTypes.EMAIL}
               handleChange={handleChange}
-              value={''}
-              name="text"
-              label="text"
+              value={info.email}
+              name="email"
+              label="Email"
             />
           </div>
 
           <div className="py-2">
             <CInputFiled
-              type={inputTypes.TEXT}
+              type={inputTypes.PASSWORD}
               handleChange={handleChange}
-              value={''}
-              name="text"
-              label="text"
+              value={info.password}
+              name="password"
+              label="Password"
             />
           </div>
           <div className={styles['forget-pass-wrap']}>
@@ -48,7 +65,7 @@ const signInUser = (props) => {
           <div className="">
             <button
               className={styles['sign-up-button']}
-              onClick={handleSignInRequest}
+              onClick={handleLocalSubmit}
             >
               Sign In
             </button>

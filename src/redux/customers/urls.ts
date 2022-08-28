@@ -1,5 +1,6 @@
-const baseUrl = `https://jsonplaceholder.typicode.com`;
+const baseUrl = 'https://dev.wepray.com.br';
 
 export const urls = {
-  getCustomers: (queryParams: string) => `${baseUrl}/${queryParams}`,
+  getCustomers: (queryParams: string) => `${baseUrl}/customers/${queryParams}`,
+  addCustomer: () => `${baseUrl}/customers`,
 };

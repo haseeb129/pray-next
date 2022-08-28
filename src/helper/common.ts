@@ -4,6 +4,7 @@ export interface ReduxInterface {
   method: string;
   url: string;
   headers?: any;
+  data?: object;
 }
 export async function newRequest({
   method,
@@ -38,4 +39,21 @@ export const inputTypes = {
   PHONE: 'phone',
   PASSWORD: 'password',
   SEARCH: 'search',
+  EMAIL: 'email',
 };
+
+export const isValidStatus = (status: number) => {
+  const validStatuses = [200, 201, 202, 203, 204];
+  if (validStatuses.includes(status)) return true;
+  return false;
+};
+
+export interface CommonTableProps {
+  data: any;
+  loading: boolean;
+  pagination: any;
+  onTableChange: any;
+  columns: any[];
+  InterfaceName?: string;
+  ExpandableComponent?: React.ElementType;
+}

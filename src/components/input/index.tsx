@@ -9,9 +9,16 @@ import React from 'react';
 import { inputTypes } from '@/helper/common';
 
 const CInputFiled = (props: any) => {
-  const { value, handleChange, type, size = 'small', name, label } = props;
+  const {
+    value,
+    handleChange = () => {},
+    type,
+    size = 'small',
+    name,
+    label,
+  } = props;
 
-  const textInput = () => {
+  const textInput = (fieldType = 'text', placeholder = '') => {
     return (
       <TextField
         variant="outlined"
@@ -23,6 +30,8 @@ const CInputFiled = (props: any) => {
         fullWidth={true}
         size={size}
         name={name}
+        type={fieldType}
+        placeholder={placeholder}
       />
     );
   };
@@ -72,6 +81,12 @@ const CInputFiled = (props: any) => {
 
       case inputTypes.SEARCH:
         return searchInput();
+
+      case inputTypes.EMAIL:
+        return textInput('email', 'email@address.com');
+
+      case inputTypes.PASSWORD:
+        return textInput('password', '');
 
       default:
         return null;

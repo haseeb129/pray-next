@@ -23,36 +23,36 @@ const signUpUser = (props) => {
               type={inputTypes.TEXT}
               handleChange={handleChange}
               value={''}
-              name="text"
-              label="text"
+              name="name"
+              label="Name"
             />
           </div>
 
           <div className="py-2">
             <CInputFiled
-              type={inputTypes.TEXT}
+              type={inputTypes.EMAIL}
               handleChange={handleChange}
               value={''}
-              name="text"
-              label="text"
+              name="email"
+              label="Email"
             />
           </div>
           <div className="py-2">
             <CInputFiled
-              type={inputTypes.TEXT}
+              type={inputTypes.PASSWORD}
               handleChange={handleChange}
               value={''}
-              name="text"
-              label="text"
+              name="password"
+              label="Password"
             />
           </div>
           <div className="py-2">
             <CInputFiled
-              type={inputTypes.TEXT}
+              type={inputTypes.PASSWORD}
               handleChange={handleChange}
               value={''}
-              name="text"
-              label="text"
+              name="confirmPassword"
+              label="Confirm Password"
             />
           </div>
 

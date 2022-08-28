@@ -1,4 +1,4 @@
-@import 'react-phone-number-input/style.css'
+/* @import 'react-phone-number-input/style.css' */
 @tailwind base;
 
 a {
@@ -83,4 +83,9 @@ html, body{
     /* min-height: calc(100vh - 56px); */
   
   }
+}
+
+
+.Toastify__toast-body{
+  text-transform: capitalize;
 }

@@ -1,6 +1,7 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 
+import auth from './auth/reducer';
 import customers from './customers/reducer';
 
 const reducer = (state = { tick: 'init' }, action: any = {}) => {
@@ -15,6 +16,6 @@ const reducer = (state = { tick: 'init' }, action: any = {}) => {
   }
 };
 
-const allReducers = combineReducers({ reducer, customers });
+const allReducers = combineReducers({ reducer, customers, auth });
 
 export default allReducers;

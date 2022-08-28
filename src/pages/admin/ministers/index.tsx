@@ -1,5 +1,4 @@
-import Button from '@material-ui/core/Button';
-
+import AntD from '@/components/antD';
 import DashboardHOC from '@/hoc/dashboard';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 
@@ -11,9 +10,7 @@ const ministers = () => {
       canonical="this is canonical "
     >
       <DashboardHOC>
-        <Button color="primary" variant="contained">
-          Click Me
-        </Button>
+        <AntD />
       </DashboardHOC>
     </MetaTagWarpper>
   );

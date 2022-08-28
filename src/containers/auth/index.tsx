@@ -1,21 +1,46 @@
 import { withRouter } from 'next/router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import ForgetPassword from '@/components/auth/forgetPassword';
+import type { SignInStateInterfacr } from '@/components/auth/signIn';
 import SignIn from '@/components/auth/signIn';
 import SignUp from '@/components/auth/signUp';
 import { componentNames } from '@/helper/auth';
+import { isValidStatus } from '@/helper/common';
 
-class Customers extends Component {
-  onSignInUser = (data) => {};
+import { userLogin, userSignUp } from '../../redux/auth/actions';
 
-  onSignUpUser = (data) => {};
+class Auth extends Component {
+  onSignInUser = async (data: SignInStateInterfacr) => {
+    const { userLogin } = this.props;
+    const response = await userLogin({
+      username: data?.email,
+      password: data?.password,
+    });
+    console.log('response', response);
+    if (response.value && isValidStatus(response.value.status)) {
+      window.location = '/admin/customers';
+      toast.success('Login Success');
+    } else {
+      toast.error(
+        response?.value?.error?.response?.data?.error?.message ||
+          'Something went wrong'
+      );
+    }
+  };
 
-  onForgetPassword = (data) => {};
+  onSignUpUser = (data: object) => {
+    console.log('Data', data);
+  };
+
+  onForgetPassword = (datadata: object) => {
+    console.log('Data', data);
+  };
 
   selectComponent = () => {
-    const { componentName } = this.props;
+    const { componentName }: any = this.props;
 
     switch (componentName) {
       case componentNames.SIGNIN:
@@ -25,6 +50,9 @@ class Customers extends Component {
 
       case componentNames.FORGET_PASSWORD:
         return <ForgetPassword onForgetPassword={this.onForgetPassword} />;
+
+      default:
+        return <></>;
     }
   };
 
@@ -33,14 +61,15 @@ class Customers extends Component {
   }
 }
 
-const mapStateToProps = ({ customers }: any) => {
+const mapStateToProps = ({ auth }: object) => {
   return {
-    customers,
+    auth,
   };
 };
 
-// const mapDispatchToProps = {
-//   getCustomers,
-// };
+const mapDispatchToProps = {
+  userLogin,
+  userSignUp,
+};
 
-export default connect(mapStateToProps, null)(withRouter(Customers));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Auth));
