@@ -44,6 +44,7 @@ const CInputFiled = (props: any) => {
           type={'text'}
           value={value}
           size={size}
+          name={name}
           onChange={(event) =>
             handleChange(event.target.name, event.target.value)
           }

@@ -1,6 +1,7 @@
 import CancelIcon from '@mui/icons-material/Cancel';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import React, { useState } from 'react';
+import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
 
 import CButton from '@/components/button';
 import CInputFiled from '@/components/input';
@@ -8,10 +9,15 @@ import { inputTypes } from '@/helper/common';
 import { customerState } from '@/helper/customers/addCustomer';
 
 const AddCustomer = (props: any) => {
-  const { onAddCustomer, toggleModal } = props;
+  const { onAddCustomer, toggleModal, preFilledInfo } = props;
   const [customerInfo, setCustomerInfo] = useState({
     ...customerState,
+    ...preFilledInfo,
   });
+
+  useEffect(() => {
+    setCustomerInfo({ ...preFilledInfo });
+  }, [preFilledInfo]);
 
   const handleChange = (name: string, value: string) => {
     setCustomerInfo({
@@ -21,7 +27,7 @@ const AddCustomer = (props: any) => {
   };
 
   const submitform = () => {
-    onAddCustomer(customerInfo);
+    onAddCustomer(customerInfo, !_.isEmpty(preFilledInfo));
   };
 
   return (
@@ -48,8 +54,8 @@ const AddCustomer = (props: any) => {
           <CInputFiled
             type={inputTypes.PHONE}
             handleChange={handleChange}
-            value={customerInfo.mobile}
-            name="mobile"
+            value={customerInfo.mobilePhone}
+            name="mobilePhone"
             label="Mobile"
           />
         </div>
@@ -72,7 +78,7 @@ const AddCustomer = (props: any) => {
           onClick={toggleModal}
         />
         <CButton
-          label={'Add Cutomer'}
+          label={'Save Cutomer'}
           outline={true}
           icon={<PersonAddAlt1Icon />}
           variant="outlined"

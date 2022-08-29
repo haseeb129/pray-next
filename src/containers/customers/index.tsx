@@ -8,18 +8,20 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import AddCustomer from '@/components/addCustomer';
-import CButton from '@/components/button';
 import DataTable from '@/components/dataTable';
 import ModalWrapper from '@/components/dialogBoxes';
-import { isValidStatus } from '@/helper/common';
-import type { Params } from '@/helper/customers/customerTableHelper';
+import SeachAndButtonContainer from '@/components/seachFieldAndButton';
+import { inputTypes, isValidStatus } from '@/helper/common';
+import type { DataType, Params } from '@/helper/customers/customerTableHelper';
 import { columns } from '@/helper/customers/customerTableHelper';
+import ExpandableComponent from '@/helper/customers/helper';
 import { addCustomer, getCustomers } from '@/redux/customers/actions';
 
 interface IProps {
   addCustomer: any;
   getCustomers: any;
   customers: any;
+  loading: boolean;
 }
 
 interface IState {
@@ -27,6 +29,8 @@ interface IState {
   pagination: any;
   tempLoading: Boolean;
   data: any;
+  search: '';
+  selectedRecord: object;
 }
 
 class Customers extends Component<IProps, IState> {
@@ -40,6 +44,8 @@ class Customers extends Component<IProps, IState> {
       },
       tempLoading: false,
       data: null,
+      search: '',
+      selectedRecord: {},
     };
   }
 
@@ -56,9 +62,27 @@ class Customers extends Component<IProps, IState> {
     this.setState({ isModalOpen: !isModalOpen });
   };
 
-  onAddCustomer = async (data: object) => {
-    console.log('onAddCustomer', data);
-    const { addCustomer } = this.props;
+  onAddCustomer = async (data: object, isEditMode: boolean) => {
+    const { addCustomer }: any = this.props;
+    console.log('isEditMode', isEditMode);
+
+    // const formattedData: any = {
+    //   customer: {
+    //     name: data.name,
+    //     email: data.email,
+    //     phone: data.phone,
+    //     mobilePhone: data.mobilePhone,
+    //     registeredNumber: '95397443000174',
+    //   },
+    //   user: {
+    //     name: data.name,
+    //     email: data.email,
+    //     username: data.email,
+    //     phone: data.phone,
+    //     password: '123456123',
+    //   },
+    // };
+
     const response = await addCustomer({
       ...data,
     });
@@ -68,13 +92,14 @@ class Customers extends Component<IProps, IState> {
     } else {
       toast.error('Something went wrong');
     }
+    // this.setState({ isModalOpen: false });
   };
 
   fetchData = async (params: Params = {}) => {
-    const { getCustomers } = this.props;
+    const { getCustomers }: any = this.props;
     this.setState({ tempLoading: true });
-    const q_params = qs.stringify(params);
-    await getCustomers(q_params);
+    const qParams = qs.stringify(params);
+    await getCustomers(qParams);
     this.setState({ tempLoading: false });
   };
 
@@ -91,16 +116,28 @@ class Customers extends Component<IProps, IState> {
     });
   };
 
+  handleSearch = (name: string, value: string) => {
+    this.setState({ [name]: value });
+  };
+
+  onEdit = (record: object) => {
+    console.log('On Edit record', record);
+    this.setState({ selectedRecord: record }, this.toggleModal);
+  };
+
   render(): React.ReactNode {
     const { isModalOpen } = this.state;
     return (
       <>
-        <CButton
-          label={'Add Cutomer'}
-          outline={true}
-          icon={<PersonAddAlt1Icon />}
-          variant="outlined"
-          onClick={this.toggleModal}
+        <SeachAndButtonContainer
+          inputType={inputTypes.SEARCH}
+          inputHandleChange={this.handleSearch}
+          inputValue={this.state.search}
+          inputName="search"
+          inputLabel="Search"
+          buttonLabel={'Add Cutomer'}
+          buttonIcon={<PersonAddAlt1Icon />}
+          buttonOnClick={this.toggleModal}
         />
         <DataTable
           columns={columns}
@@ -109,14 +146,10 @@ class Customers extends Component<IProps, IState> {
           pagination={{ total: this?.props?.customers?.count }}
           onTableChange={() => {}}
           // ExpandableComponent={this.test()}
-          ExpandableComponent={<PersonAddAlt1Icon fontSize="medium" />}
-          onEdit={(record) => {
-            console.log('On Edit record', record);
-          }}
+          ExpandableComponent={ExpandableComponent}
+          onEdit={this.onEdit}
         />
 
-        {/* <AntD /> */}
-        {/* <CollapsibleTable /> */}
         <ModalWrapper
           isOpen={isModalOpen}
           toggleModal={this.toggleModal}
@@ -126,6 +159,7 @@ class Customers extends Component<IProps, IState> {
           <AddCustomer
             onAddCustomer={this.onAddCustomer}
             toggleModal={this.toggleModal}
+            preFilledInfo={this.state.selectedRecord}
           />
         </ModalWrapper>
       </>
