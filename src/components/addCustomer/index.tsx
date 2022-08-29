@@ -10,13 +10,12 @@ import { customerState } from '@/helper/customers/addCustomer';
 
 const AddCustomer = (props: any) => {
   const { onAddCustomer, toggleModal, preFilledInfo } = props;
-  const [customerInfo, setCustomerInfo] = useState({
-    ...customerState,
-    ...preFilledInfo,
-  });
+
+  const [customerInfo, setCustomerInfo] = useState({ ...customerState });
 
   useEffect(() => {
-    setCustomerInfo({ ...preFilledInfo });
+    if (!_.isEmpty(preFilledInfo)) setCustomerInfo({ ...preFilledInfo });
+    else setCustomerInfo({ ...customerState });
   }, [preFilledInfo]);
 
   const handleChange = (name: string, value: string) => {
@@ -43,7 +42,7 @@ const AddCustomer = (props: any) => {
       <div className="my-5 flex w-full gap-5">
         <div className=" flex-1">
           <CInputFiled
-            type={inputTypes.PHONE}
+            type={inputTypes.TEXT}
             handleChange={handleChange}
             value={customerInfo.phone}
             name="phone"
@@ -52,7 +51,7 @@ const AddCustomer = (props: any) => {
         </div>
         <div className=" flex-1">
           <CInputFiled
-            type={inputTypes.PHONE}
+            type={inputTypes.TEXT}
             handleChange={handleChange}
             value={customerInfo.mobilePhone}
             name="mobilePhone"

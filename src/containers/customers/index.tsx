@@ -10,12 +10,18 @@ import { toast } from 'react-toastify';
 import AddCustomer from '@/components/addCustomer';
 import DataTable from '@/components/dataTable';
 import ModalWrapper from '@/components/dialogBoxes';
+import DeleteDialog from '@/components/dialogBoxes/deleteDialog';
 import SeachAndButtonContainer from '@/components/seachFieldAndButton';
 import { inputTypes, isValidStatus } from '@/helper/common';
 import type { DataType, Params } from '@/helper/customers/customerTableHelper';
-import { columns } from '@/helper/customers/customerTableHelper';
+import { columnsGenerator } from '@/helper/customers/customerTableHelper';
 import ExpandableComponent from '@/helper/customers/helper';
-import { addCustomer, getCustomers } from '@/redux/customers/actions';
+import {
+  addCustomer,
+  deleteCustomer,
+  editCustomer,
+  getCustomers,
+} from '@/redux/customers/actions';
 
 interface IProps {
   addCustomer: any;
@@ -30,7 +36,7 @@ interface IState {
   tempLoading: Boolean;
   data: any;
   search: '';
-  selectedRecord: object;
+  selectedRecord: any;
 }
 
 class Customers extends Component<IProps, IState> {
@@ -53,46 +59,59 @@ class Customers extends Component<IProps, IState> {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const { getCustomers }: any = this.props;
     const response = await getCustomers();
-    console.log('response', response);
+    // console.log('response', response);
     // this.fetchData(this.state.pagination);
   }
 
-  toggleModal = () => {
+  toggleModal = (selectedRecord = {}) => {
     const { isModalOpen } = this.state;
-    this.setState({ isModalOpen: !isModalOpen });
+    this.setState({
+      selectedRecord,
+      isModalOpen: !isModalOpen,
+    });
   };
 
-  onAddCustomer = async (data: object, isEditMode: boolean) => {
-    const { addCustomer }: any = this.props;
-    console.log('isEditMode', isEditMode);
+  onAddCustomer = async (data: object, isEditMode: boolean = false) => {
+    const { addCustomer, editCustomer }: any = this.props;
+    const { selectedRecord }: any = this.state;
+    // console.log('isEditMode', isEditMode);
 
-    // const formattedData: any = {
-    //   customer: {
-    //     name: data.name,
-    //     email: data.email,
-    //     phone: data.phone,
-    //     mobilePhone: data.mobilePhone,
-    //     registeredNumber: '95397443000174',
-    //   },
-    //   user: {
-    //     name: data.name,
-    //     email: data.email,
-    //     username: data.email,
-    //     phone: data.phone,
-    //     password: '123456123',
-    //   },
-    // };
+    const formattedData: any = {
+      customer: {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        mobilePhone: data.mobilePhone,
+        registeredNumber: '95397443000174',
+      },
+      user: {
+        name: data.name,
+        email: data.email,
+        username: data.email,
+        phone: data.phone,
+        password: '123456123',
+      },
+    };
 
-    const response = await addCustomer({
-      ...data,
-    });
+    let response = null;
+    if (isEditMode) {
+      response = await editCustomer(
+        {
+          ...formattedData,
+        },
+        selectedRecord?.id
+      );
+    } else {
+      response = await addCustomer({
+        ...formattedData,
+      });
+    }
+
     if (response.value && isValidStatus(response.value.status)) {
-      // this.setState({ stats: response.value?.data?.data });
       toast.success('handleLocalSubmit');
     } else {
       toast.error('Something went wrong');
     }
-    // this.setState({ isModalOpen: false });
   };
 
   fetchData = async (params: Params = {}) => {
@@ -120,9 +139,31 @@ class Customers extends Component<IProps, IState> {
     this.setState({ [name]: value });
   };
 
-  onEdit = (record: object) => {
-    console.log('On Edit record', record);
-    this.setState({ selectedRecord: record }, this.toggleModal);
+  onSearchButtonClick = () => {
+    console.log('onSearchButtonClick');
+    // this.setState({ selectedRecord: record }, this.toggleModal);
+    // this.toggleModal(record);
+  };
+
+  onDeleteClick = (record: string) => {
+    console.log('onSearchButtonClick', record);
+    this.setState({
+      selectedRecord: record,
+    });
+    // this.setState({ selectedRecord: record }, this.toggleModal);
+    // this.toggleModal(record);
+  };
+
+  onDeleteConfirm = async () => {
+    const { deleteCustomer }: any = this.props;
+    const { selectedRecord } = this.state;
+    const response = await deleteCustomer(selectedRecord?.id);
+
+    if (response.value && isValidStatus(response.value.status)) {
+      toast.success('Deleted Success');
+    } else {
+      toast.error('Something went wrong');
+    }
   };
 
   render(): React.ReactNode {
@@ -137,29 +178,29 @@ class Customers extends Component<IProps, IState> {
           inputLabel="Search"
           buttonLabel={'Add Cutomer'}
           buttonIcon={<PersonAddAlt1Icon />}
-          buttonOnClick={this.toggleModal}
+          buttonOnClick={() => this.toggleModal()}
+          onSearchButtonClick={this.onSearchButtonClick}
         />
         <DataTable
-          columns={columns}
+          columns={columnsGenerator(this.toggleModal, this.onDeleteClick)}
           data={this?.props?.customers?.result || []}
           loading={this?.props?.loading || this.state.tempLoading || false}
           pagination={{ total: this?.props?.customers?.count }}
           onTableChange={() => {}}
-          // ExpandableComponent={this.test()}
           ExpandableComponent={ExpandableComponent}
-          onEdit={this.onEdit}
+          onEdit={this.toggleModal}
         />
-
+        <DeleteDialog onOKClick={() => {}} title="" content="" />
         <ModalWrapper
           isOpen={isModalOpen}
-          toggleModal={this.toggleModal}
+          toggleModal={() => this.toggleModal()}
           title="Add Customer"
           Icon={<PersonAddAlt1Icon fontSize="medium" />}
         >
           <AddCustomer
             onAddCustomer={this.onAddCustomer}
             toggleModal={this.toggleModal}
-            preFilledInfo={this.state.selectedRecord}
+            preFilledInfo={{ ...this.state.selectedRecord }}
           />
         </ModalWrapper>
       </>
@@ -177,6 +218,8 @@ const mapStateToProps = ({ customers }: any) => {
 const mapDispatchToProps = {
   getCustomers,
   addCustomer,
+  editCustomer,
+  deleteCustomer,
 };
 
 export default connect(

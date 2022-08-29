@@ -37,3 +37,36 @@ export function addCustomer(data: object) {
     payload: newRequest(requestObject),
   };
 }
+
+export function editCustomer(data: object, id: string) {
+  const requestObject: ReduxInterface = {
+    method: 'PUT',
+    url: urls.editCustomer(id),
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type': 'application/json',
+    },
+    data,
+  };
+
+  return {
+    type: actionType.EDIT_CUSTOMER,
+    payload: newRequest(requestObject),
+  };
+}
+
+export function deleteCustomer(id: string) {
+  const requestObject: ReduxInterface = {
+    method: 'DELETE',
+    url: urls.deleteCustomer(id),
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  return {
+    type: actionType.DELETE_CUSTOMER,
+    payload: newRequest(requestObject),
+  };
+}

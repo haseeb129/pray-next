@@ -13,3 +13,19 @@ export const ADD_CUSTOMER_PENDING: string =
 
 export const ADD_CUSTOMER_FULFILLED: string =
   'pray/customers/ADD_CUSTOMER_FULFILLED';
+
+export const EDIT_CUSTOMER: string = 'pray/customers/EDIT_CUSTOMER';
+
+export const EDIT_CUSTOMER_PENDING: string =
+  'pray/customers/EDIT_CUSTOMER_PENDING';
+
+export const EDIT_CUSTOMER_FULFILLED: string =
+  'pray/customers/EDIT_CUSTOMER_FULFILLED';
+
+export const DELETE_CUSTOMER: string = 'pray/customers/DELETE_CUSTOMER';
+
+export const DELETE_CUSTOMER_PENDING: string =
+  'pray/customers/DELETE_CUSTOMER_PENDING';
+
+export const DELETE_CUSTOMER_FULFILLED: string =
+  'pray/customers/DELETE_CUSTOMER_FULFILLED';

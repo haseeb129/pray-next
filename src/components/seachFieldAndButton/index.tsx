@@ -13,6 +13,7 @@ function SeachAndButtonContainer(props: any) {
     buttonLabel,
     buttonIcon,
     buttonOnClick,
+    onSearchButtonClick,
   } = props;
   return (
     <div className="flex justify-between gap-x-2">
@@ -22,6 +23,7 @@ function SeachAndButtonContainer(props: any) {
         value={inputValue}
         name={inputName}
         label={inputLabel}
+        onSearchButtonClick={onSearchButtonClick}
       />
       <CButton
         label={buttonLabel}

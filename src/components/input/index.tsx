@@ -16,6 +16,7 @@ const CInputFiled = (props: any) => {
     size = 'small',
     name,
     label,
+    onSearchButtonClick = () => {},
   } = props;
 
   const textInput = (fieldType = 'text', placeholder = '') => {
@@ -50,10 +51,15 @@ const CInputFiled = (props: any) => {
           }
           endAdornment={
             <InputAdornment position="end">
-              <SearchIcon fill="" />
+              <SearchIcon fill="" onClick={onSearchButtonClick} />
             </InputAdornment>
           }
           label="Search"
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              onSearchButtonClick();
+            }
+          }}
         />
       </FormControl>
     );

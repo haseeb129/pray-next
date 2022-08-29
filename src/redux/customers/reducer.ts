@@ -18,6 +18,16 @@ export default function reducer(state = initialState, action: any = {}) {
     case actionTypes.ADD_CUSTOMER_FULFILLED:
       return { ...state, loading: false };
 
+    case actionTypes.EDIT_CUSTOMER_PENDING:
+      return { ...state, loading: true };
+    case actionTypes.EDIT_CUSTOMER_FULFILLED:
+      return { ...state, loading: false };
+
+    case actionTypes.DELETE_CUSTOMER_PENDING:
+      return { ...state, loading: true };
+    case actionTypes.DELETE_CUSTOMER_FULFILLED:
+      return { ...state, loading: false };
+
     default:
       return state;
   }
