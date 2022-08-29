@@ -87,5 +87,16 @@ html, body{
 
 
 .Toastify__toast-body{
+  
   text-transform: capitalize;
+}
+.Toastify__toast{
+  z-index:999999999999 !important
+}
+
+
+.ant-table-expanded-row.ant-table-expanded-row-level-1 .ant-table-cell{
+  {
+    overflow-x: auto;
+  }
 }

@@ -1,7 +1,6 @@
 import Button from '@mui/material/Button';
 import React from 'react';
 
-
 const CButton = (
   {
     label,
@@ -47,6 +46,7 @@ const CButton = (
       variant={variant}
       color={color}
       startIcon={icon}
+      style={{ height: '40px', fontSize: '12px', textOverflow: 'ellipsis ' }}
     >
       {label}
     </Button>

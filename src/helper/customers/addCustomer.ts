@@ -1,12 +1,12 @@
 interface CustomerStateInterface {
   name: string;
   phone: string;
-  mobile: string;
+  mobilePhone: string;
   email: string;
 }
 export const customerState: CustomerStateInterface = {
   name: '',
   phone: '',
-  mobile: '',
+  mobilePhone: '',
   email: '',
 };

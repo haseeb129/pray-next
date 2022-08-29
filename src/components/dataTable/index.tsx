@@ -4,7 +4,6 @@ import type { FilterValue, SorterResult } from 'antd/es/table/interface';
 import React from 'react';
 
 import type { CommonTableProps } from '@/helper/common';
-import ExpandableComponent from '@/helper/customers/helper';
 
 interface DataType {
   name: {
@@ -17,17 +16,18 @@ interface DataType {
     uuid: string;
   };
   key: React.Key;
+  registeredNumber: string;
 }
 
-const DataTable: React.FC = ({
+const DataTable: any = ({
   data,
   loading,
   pagination,
   onTableChange,
   columns,
   onEdit,
-}: // ExpandableComponent,
-CommonTableProps): any => {
+  ExpandableComponent,
+}: CommonTableProps) => {
   const handleTableChange = (
     newPagination: TablePaginationConfig,
     filters: Record<string, FilterValue>,
@@ -43,6 +43,7 @@ CommonTableProps): any => {
 
   return (
     <Table
+      className="mt-5"
       rowKey={(record) => record?.registeredNumber}
       pagination={pagination}
       loading={loading}
@@ -53,7 +54,10 @@ CommonTableProps): any => {
       }}
       expandable={{
         expandedRowRender: (record) => (
-          <ExpandableComponent data={record} onEdit={() => onEdit(record)} />
+          <ExpandableComponent
+            data={record}
+            onEdit={() => onEdit({ ...record })}
+          />
         ),
       }}
       dataSource={data}

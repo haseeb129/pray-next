@@ -56,4 +56,5 @@ export interface CommonTableProps {
   columns: any[];
   InterfaceName?: string;
   ExpandableComponent?: React.ElementType;
+  onEdit: any;
 }

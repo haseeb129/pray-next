@@ -22,8 +22,8 @@ const expandableComponent = ({ data, onEdit }) => {
   );
 
   return (
-    <Box sx={{ margin: 1 }}>
-      <Table size="small" aria-label="purchases">
+    <Box>
+      <Table size="small">
         <TableBody>
           <TableRow>
             <TableCell>

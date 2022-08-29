@@ -3,7 +3,7 @@ import type { TablePaginationConfig } from 'antd/es/table';
 import type { SorterResult } from 'antd/es/table/interface';
 import type { ColumnsType } from 'antd/lib/table';
 
-interface DataType {
+export interface DataType {
   name: {
     first: string;
     last: string;

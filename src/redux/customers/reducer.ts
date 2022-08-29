@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action: any = {}) {
     case actionTypes.ADD_CUSTOMER_PENDING:
       return { ...state, loading: true };
     case actionTypes.ADD_CUSTOMER_FULFILLED:
-      return { ...state, customers: action?.payload?.data, loading: false };
+      return { ...state, loading: false };
 
     default:
       return state;

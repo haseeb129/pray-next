@@ -11,7 +11,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import { Divider } from 'antd';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -53,8 +52,8 @@ export default function DashboardHOC(props: Props) {
         <span style={{ ...titleClasses }}>PRAY</span>
       </Toolbar>
       {/* </AppBar> */}
-      <Divider />
-      <List>
+
+      <List className={styles.sidebarstyle}>
         {panelSideBar.map((item, index) => (
           <Link href={item.path} key={`${item.text}${index}`}>
             <ListItem key={item.text} disablePadding>
@@ -80,6 +79,7 @@ export default function DashboardHOC(props: Props) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          boxShadow: 'none',
         }}
       >
         <Toolbar>
@@ -151,7 +151,6 @@ export default function DashboardHOC(props: Props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <Toolbar />
         {children}
       </Box>
     </Box>
