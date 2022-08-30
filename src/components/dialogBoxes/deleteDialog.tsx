@@ -1,30 +1,35 @@
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { Modal, Space } from 'antd';
+import CancelIcon from '@mui/icons-material/Cancel';
+import DoneIcon from '@mui/icons-material/Done';
 import React from 'react';
 
-const { confirm } = Modal;
+import CButton from '../button';
 
-const showPromiseConfirm = (onOKClick: any, title: any, content: any): any => {
-  confirm({
-    title,
-    icon: <ExclamationCircleOutlined />,
-    content,
-    keyboard: true,
-    zIndex: 9999,
-    closable: true,
-    okText: 'Delete',
-    okType: 'danger',
-    onOk() {
-      return onOKClick();
-    },
+const deleteDialog = ({
+  toggleModal,
+  confirmFunction,
+  content = 'Are You Sure You Want To Delete This Record',
+}: any) => (
+  <>
+    <div>{content}</div>
 
-    onCancel() {},
-  });
-};
-
-const deleteDialog = (onOKClick: any, title: any, content: any) => (
-  <Space wrap>{showPromiseConfirm(onOKClick, title, content)}</Space>
-  // <h1>asas</h1>
+    <div className="my-5 flex w-full justify-end gap-5">
+      <CButton
+        label={'Cancel'}
+        outline={true}
+        icon={<CancelIcon />}
+        variant="outlined"
+        color="error"
+        onClick={toggleModal}
+      />
+      <CButton
+        label={'Delete'}
+        outline={true}
+        icon={<DoneIcon />}
+        variant="outlined"
+        onClick={confirmFunction}
+      />
+    </div>
+  </>
 );
 
 export default deleteDialog;

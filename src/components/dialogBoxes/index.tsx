@@ -45,3 +45,17 @@ const ModalWrapper: React.Fc = (props: any) => {
   );
 };
 export default ModalWrapper;
+
+export const getModal = (getModalProps: any) => {
+  const modalProps = getModalProps();
+  return (
+    <ModalWrapper
+      isOpen={modalProps?.isOpen}
+      toggleModal={modalProps?.toggleModal}
+      title={modalProps?.title}
+      Icon={modalProps?.Icon}
+    >
+      {modalProps?.childernComponent}
+    </ModalWrapper>
+  );
+};

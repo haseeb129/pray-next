@@ -1,6 +1,7 @@
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import type { TablePaginationConfig } from 'antd';
 import type { FilterValue, SorterResult } from 'antd/lib/table/interface';
+import _ from 'lodash';
 import { withRouter } from 'next/router';
 import qs from 'qs';
 import React, { Component } from 'react';
@@ -9,10 +10,10 @@ import { toast } from 'react-toastify';
 
 import AddCustomer from '@/components/addCustomer';
 import DataTable from '@/components/dataTable';
-import ModalWrapper from '@/components/dialogBoxes';
+import { getModal } from '@/components/dialogBoxes';
 import DeleteDialog from '@/components/dialogBoxes/deleteDialog';
 import SeachAndButtonContainer from '@/components/seachFieldAndButton';
-import { inputTypes, isValidStatus } from '@/helper/common';
+import { inputTypes, isValidStatus, modalNames } from '@/helper/common';
 import type { DataType, Params } from '@/helper/customers/customerTableHelper';
 import { columnsGenerator } from '@/helper/customers/customerTableHelper';
 import ExpandableComponent from '@/helper/customers/helper';
@@ -37,6 +38,7 @@ interface IState {
   data: any;
   search: '';
   selectedRecord: any;
+  modalName: string;
 }
 
 class Customers extends Component<IProps, IState> {
@@ -44,6 +46,7 @@ class Customers extends Component<IProps, IState> {
     super(props);
     this.state = {
       isModalOpen: false,
+      modalName: '',
       pagination: {
         current: 1,
         pageSize: 10,
@@ -63,16 +66,17 @@ class Customers extends Component<IProps, IState> {
     // this.fetchData(this.state.pagination);
   }
 
-  toggleModal = (selectedRecord = {}) => {
+  toggleModal = (selectedRecord = {}, modalName = '') => {
     const { isModalOpen } = this.state;
     this.setState({
       selectedRecord,
       isModalOpen: !isModalOpen,
+      modalName,
     });
   };
 
   onAddCustomer = async (data: object, isEditMode: boolean = false) => {
-    const { addCustomer, editCustomer }: any = this.props;
+    const { addCustomer, editCustomer, getCustomers }: any = this.props;
     const { selectedRecord }: any = this.state;
     // console.log('isEditMode', isEditMode);
 
@@ -109,6 +113,7 @@ class Customers extends Component<IProps, IState> {
 
     if (response.value && isValidStatus(response.value.status)) {
       toast.success('handleLocalSubmit');
+      await getCustomers();
     } else {
       toast.error('Something went wrong');
     }
@@ -145,29 +150,60 @@ class Customers extends Component<IProps, IState> {
     // this.toggleModal(record);
   };
 
-  onDeleteClick = (record: string) => {
-    console.log('onSearchButtonClick', record);
-    this.setState({
-      selectedRecord: record,
-    });
-    // this.setState({ selectedRecord: record }, this.toggleModal);
-    // this.toggleModal(record);
+  onDeleteClick = (record: object) => {
+    this.toggleModal(record, modalNames.DELETE_CONFIRMATION);
   };
 
   onDeleteConfirm = async () => {
-    const { deleteCustomer }: any = this.props;
+    const { deleteCustomer, getCustomers }: any = this.props;
     const { selectedRecord } = this.state;
     const response = await deleteCustomer(selectedRecord?.id);
 
     if (response.value && isValidStatus(response.value.status)) {
       toast.success('Deleted Success');
+      await getCustomers();
     } else {
       toast.error('Something went wrong');
     }
   };
 
+  getModalProps = () => {
+    switch (this.state.modalName) {
+      case modalNames.ADD_CUSTOMER:
+        return {
+          isOpen: this.state.isModalOpen,
+          toggleModal: () => this.toggleModal(),
+          title: 'Add Customer',
+          Icon: <PersonAddAlt1Icon fontSize="medium" />,
+          childernComponent: (
+            <AddCustomer
+              onAddCustomer={this.onAddCustomer}
+              toggleModal={this.toggleModal}
+              preFilledInfo={{ ...this.state.selectedRecord }}
+            />
+          ),
+        };
+
+      case modalNames.DELETE_CONFIRMATION:
+        return {
+          isOpen: this.state.isModalOpen,
+          toggleModal: () => this.toggleModal(),
+          title: 'Delete',
+          childernComponent: (
+            <DeleteDialog
+              confirmFunction={this.onDeleteConfirm}
+              toggleModal={this.toggleModal}
+            />
+          ),
+        };
+
+      default:
+        return {};
+    }
+  };
+
   render(): React.ReactNode {
-    const { isModalOpen } = this.state;
+    const { isModalOpen, modalName } = this.state;
     return (
       <>
         <SeachAndButtonContainer
@@ -178,7 +214,7 @@ class Customers extends Component<IProps, IState> {
           inputLabel="Search"
           buttonLabel={'Add Cutomer'}
           buttonIcon={<PersonAddAlt1Icon />}
-          buttonOnClick={() => this.toggleModal()}
+          buttonOnClick={() => this.toggleModal({}, modalNames.ADD_CUSTOMER)}
           onSearchButtonClick={this.onSearchButtonClick}
         />
         <DataTable
@@ -190,19 +226,8 @@ class Customers extends Component<IProps, IState> {
           ExpandableComponent={ExpandableComponent}
           onEdit={this.toggleModal}
         />
-        <DeleteDialog onOKClick={() => {}} title="" content="" />
-        <ModalWrapper
-          isOpen={isModalOpen}
-          toggleModal={() => this.toggleModal()}
-          title="Add Customer"
-          Icon={<PersonAddAlt1Icon fontSize="medium" />}
-        >
-          <AddCustomer
-            onAddCustomer={this.onAddCustomer}
-            toggleModal={this.toggleModal}
-            preFilledInfo={{ ...this.state.selectedRecord }}
-          />
-        </ModalWrapper>
+
+        {isModalOpen && !_.isEmpty(modalName) && getModal(this.getModalProps)}
       </>
     );
   }

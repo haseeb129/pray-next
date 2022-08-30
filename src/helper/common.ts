@@ -58,3 +58,8 @@ export interface CommonTableProps {
   ExpandableComponent?: React.ElementType;
   onEdit: any;
 }
+
+export const modalNames = {
+  ADD_CUSTOMER: 'ADD_CUSTOMER',
+  DELETE_CONFIRMATION: 'DELETE_CONFIRMATION',
+};

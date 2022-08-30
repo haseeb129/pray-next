@@ -4,6 +4,7 @@ import type { FilterValue, SorterResult } from 'antd/es/table/interface';
 import React from 'react';
 
 import type { CommonTableProps } from '@/helper/common';
+import { modalNames } from '@/helper/common';
 
 interface DataType {
   name: {
@@ -22,21 +23,22 @@ interface DataType {
 const DataTable: any = ({
   data,
   loading,
-  pagination,
+  pagination: oldpagination,
   onTableChange,
   columns,
   onEdit,
   ExpandableComponent,
 }: CommonTableProps) => {
   const handleTableChange = (
-    newPagination: TablePaginationConfig,
+    pagination: TablePaginationConfig,
     filters: Record<string, FilterValue>,
     sorter: SorterResult<DataType>
   ) => {
     onTableChange({
       sortField: sorter.field as string,
       sortOrder: sorter.order as string,
-      pagination: newPagination,
+      pagination,
+
       ...filters,
     });
   };
@@ -45,7 +47,7 @@ const DataTable: any = ({
     <Table
       className="mt-5"
       rowKey={(record) => record?.registeredNumber}
-      pagination={pagination}
+      pagination={oldpagination}
       loading={loading}
       onChange={handleTableChange}
       columns={columns}
@@ -56,7 +58,7 @@ const DataTable: any = ({
         expandedRowRender: (record) => (
           <ExpandableComponent
             data={record}
-            onEdit={() => onEdit({ ...record })}
+            onEdit={() => onEdit({ ...record }, modalNames.ADD_CUSTOMER)}
           />
         ),
       }}

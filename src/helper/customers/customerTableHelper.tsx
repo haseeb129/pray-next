@@ -7,6 +7,8 @@ import type { SorterResult } from 'antd/es/table/interface';
 import type { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 
+import { modalNames } from '../common';
+
 export interface DataType {
   name: {
     first: string;
@@ -25,10 +27,11 @@ const optionConstants = {
   DELETE: 'Delete',
 };
 
-const menu = (record, onEdit, onDelete) => (
+const menu = (record: any, onEdit: any, onDelete: any) => (
   <Menu
     onClick={(e) => {
-      if (e.key === optionConstants.EDIT) onEdit(record);
+      if (e.key === optionConstants.EDIT)
+        onEdit(record, modalNames.ADD_CUSTOMER);
       else onDelete(record);
     }}
     items={[
@@ -38,7 +41,7 @@ const menu = (record, onEdit, onDelete) => (
   />
 );
 
-export const columnsGenerator = (onEdit, onDelete): any => {
+export const columnsGenerator = (onEdit: any, onDelete: any) => {
   const columns: ColumnsType<DataType> = [
     Table.SELECTION_COLUMN,
 
@@ -73,7 +76,10 @@ export const columnsGenerator = (onEdit, onDelete): any => {
       width: '10%',
       render: (record) => (
         <Space size="small" style={{ float: 'right' }}>
-          <Dropdown overlay={menu(record, onEdit, onDelete)}>
+          <Dropdown
+            overlay={menu(record, onEdit, onDelete)}
+            trigger={['click']}
+          >
             <IconButton size="small" aria-haspopup="true">
               <MoreVertRoundedIcon fontSize="small" />
             </IconButton>
