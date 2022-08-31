@@ -15,10 +15,10 @@ export interface CustomerReducer {
 
 const expandableComponent = ({ data, onEdit }) => {
   const simpleTableRow = (name: string, value: any) => (
-    <TableRow>
-      <TableCell>{name}</TableCell>
-      <TableCell>{_.isEmpty(value) ? '--' : value}</TableCell>
-    </TableRow>
+    <span className="flex py-1">
+      <span className="w-2/4">{name}</span>
+      <span className=" w-2/4">{_.isEmpty(value) ? '--' : value}</span>
+    </span>
   );
 
   return (
@@ -47,6 +47,7 @@ const expandableComponent = ({ data, onEdit }) => {
                 outline={true}
                 variant="outlined"
                 onClick={onEdit}
+                className="mt-3"
               />
             </TableCell>
           </TableRow>

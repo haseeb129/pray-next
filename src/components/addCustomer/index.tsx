@@ -42,7 +42,7 @@ const AddCustomer = (props: any) => {
       <div className="my-5 flex w-full gap-5">
         <div className=" flex-1">
           <CInputFiled
-            type={inputTypes.TEXT}
+            type={inputTypes.PHONE}
             handleChange={handleChange}
             value={customerInfo.phone}
             name="phone"
@@ -51,7 +51,7 @@ const AddCustomer = (props: any) => {
         </div>
         <div className=" flex-1">
           <CInputFiled
-            type={inputTypes.TEXT}
+            type={inputTypes.PHONE}
             handleChange={handleChange}
             value={customerInfo.mobilePhone}
             name="mobilePhone"

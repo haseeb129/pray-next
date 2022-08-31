@@ -85,18 +85,26 @@ html, body{
   }
 }
 
+.Toastify{
+  position:relative;
+  z-index:10000
+}
 
-.Toastify__toast-body{
-  
+.Toastify__toast-body{ 
   text-transform: capitalize;
 }
-.Toastify__toast{
-  z-index:999999999999 !important
-}
 
 
-.ant-table-expanded-row.ant-table-expanded-row-level-1 .ant-table-cell{
-  {
-    overflow-x: auto;
+@media only screen and (max-width:991px){
+
+  .MuiTableCell-root{
+    display:block !important;
+    padding: 0px 5px;
+  
+  }
+  .MuiTableCell-root .MuiTableCell-root{
+    display:table-cell !important
   }
 }
+
+

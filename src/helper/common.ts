@@ -63,3 +63,10 @@ export const modalNames = {
   ADD_CUSTOMER: 'ADD_CUSTOMER',
   DELETE_CONFIRMATION: 'DELETE_CONFIRMATION',
 };
+
+export const logoutExistingUser = () => {
+  if (window != undefined) {
+    window.location = '/auth/signIn/';
+    localStorage.clear();
+  }
+};

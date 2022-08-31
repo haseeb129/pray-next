@@ -11,6 +11,7 @@ const CButton = (
     color = 'success',
     fontSize = '18px',
     variant = 'contained',
+    className = '',
   },
   paddingX = '10px',
   borderColor = '#f31c23'
@@ -47,6 +48,7 @@ const CButton = (
       color={color}
       startIcon={icon}
       style={{ height: '40px', fontSize: '12px', textOverflow: 'ellipsis ' }}
+      className={className}
     >
       {label}
     </Button>

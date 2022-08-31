@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Link from 'next/link';
 import * as React from 'react';
 
+import { logoutExistingUser } from '@/helper/common';
 import { panelSideBar } from '@/helper/dashboard';
 
 import styles from './index.module.scss';
@@ -33,25 +34,11 @@ export default function DashboardHOC(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const classesss = {
-    backgroundColor: '#1976d2',
-    // padding: '15px 35px',
-  };
-
-  const titleClasses = {
-    fontSize: '24px',
-    fontWeight: '600',
-    paddingLeft: '25px',
-    color: '#fff',
-  };
-
   const drawer = (
     <div className={styles.customToolbar}>
-      {/* <AppBar position="fixed"> */}
-      <Toolbar style={{ ...classesss }} disableGutters={true}>
-        <span style={{ ...titleClasses }}>PRAY</span>
+      <Toolbar className={styles.backgroundCustomColor} disableGutters={true}>
+        <span className={styles.titleClasses}>PRAY</span>
       </Toolbar>
-      {/* </AppBar> */}
 
       <List className={styles.sidebarstyle}>
         {panelSideBar.map((item, index) => (
@@ -91,18 +78,22 @@ export default function DashboardHOC(props: Props) {
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
-            <span style={{ ...titleClasses }}>PRAY</span>
+            <span className={styles.titleClasses}>PRAY</span>
           </IconButton>
 
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={() => {}}
-          >
-            <span className="pr-3">LogOut</span>
-            <LogoutIcon />
-          </IconButton>
+          {true && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={logoutExistingUser}
+              className={styles.logoutButton}
+              size="small"
+            >
+              <span className="pr-3">LogOut</span>
+              <LogoutIcon />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
       <Box
