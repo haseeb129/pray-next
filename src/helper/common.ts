@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { logout } from '@/utils/auth';
+
 export interface ReduxInterface {
   method: string;
   url: string;
@@ -66,7 +68,15 @@ export const modalNames = {
 
 export const logoutExistingUser = () => {
   if (window != undefined) {
+    logout();
     window.location = '/auth/signIn/';
     localStorage.clear();
+  }
+};
+
+export const getAccessToken = () => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('accessToken');
+    return token;
   }
 };

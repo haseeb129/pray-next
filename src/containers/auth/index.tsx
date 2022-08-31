@@ -9,6 +9,7 @@ import SignIn from '@/components/auth/signIn';
 import SignUp from '@/components/auth/signUp';
 import { componentNames } from '@/helper/auth';
 import { isValidStatus } from '@/helper/common';
+import { login } from '@/utils/auth';
 
 import { userLogin, userSignUp } from '../../redux/auth/actions';
 
@@ -19,7 +20,8 @@ class Auth extends Component {
       username: data?.email,
       password: data?.password,
     });
-    console.log('response', response);
+    await login({ token: response?.value?.data?.result?.accessToken || '' });
+
     if (response.value && isValidStatus(response.value.status)) {
       window.location = '/admin/customers';
       toast.success('Login Success');

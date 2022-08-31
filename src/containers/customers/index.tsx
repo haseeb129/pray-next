@@ -61,7 +61,7 @@ class Customers extends Component<IProps, IState> {
   async componentDidMount() {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const { getCustomers }: any = this.props;
-    const response = await getCustomers();
+    await getCustomers();
     // console.log('response', response);
     // this.fetchData(this.state.pagination);
   }
