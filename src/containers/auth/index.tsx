@@ -11,7 +11,11 @@ import { componentNames } from '@/helper/auth';
 import { isValidStatus } from '@/helper/common';
 import { login } from '@/utils/auth';
 
-import { userLogin, userSignUp } from '../../redux/auth/actions';
+import {
+  forgetPassword,
+  userLogin,
+  userSignUp,
+} from '../../redux/auth/actions';
 
 class Auth extends Component {
   onSignInUser = async (data: SignInStateInterfacr) => {
@@ -37,8 +41,22 @@ class Auth extends Component {
     console.log('Data', data);
   };
 
-  onForgetPassword = (datadata: object) => {
-    console.log('Data', data);
+  onForgetPassword = async (data: object) => {
+    const { forgetPassword } = this.props;
+    const response = await forgetPassword({
+      username: data?.email,
+    });
+    if (response.value && isValidStatus(response.value.status)) {
+      toast.success(
+        response?.value?.data?.result?.message ||
+          'Email sent on the given address'
+      );
+    } else {
+      toast.error(
+        response?.value?.error?.response?.data?.error?.message ||
+          'Something went wrong'
+      );
+    }
   };
 
   selectComponent = () => {
@@ -72,6 +90,7 @@ const mapStateToProps = ({ auth }: object) => {
 const mapDispatchToProps = {
   userLogin,
   userSignUp,
+  forgetPassword,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Auth));

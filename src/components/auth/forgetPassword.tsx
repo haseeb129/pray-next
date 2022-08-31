@@ -1,13 +1,28 @@
 import PersonPinIcon from '@mui/icons-material/PersonPin';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { inputTypes } from '@/helper/common';
 
 import CInputFiled from '../input';
 import styles from './index.module.scss';
 
+export interface ForgetPasswordStateInterfacr {
+  email: string;
+}
+
 const forgetPassword = (props: any) => {
-  const { handleChange, handleSignInRequest } = props;
+  const { onForgetPassword } = props;
+  const [info, setInfo] = useState<ForgetPasswordStateInterfacr>({
+    email: '',
+  });
+
+  const handleLocalSubmit = () => {
+    onForgetPassword(info);
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setInfo({ ...info, [name]: value });
+  };
 
   return (
     <div className={styles['guest-signIn-page-wrapper']}>
@@ -22,7 +37,7 @@ const forgetPassword = (props: any) => {
             <CInputFiled
               type={inputTypes.EMAIL}
               handleChange={handleChange}
-              value={''}
+              value={info.email}
               name="email"
               label="Email"
             />
@@ -31,9 +46,9 @@ const forgetPassword = (props: any) => {
           <div className="">
             <button
               className={styles['sign-up-button']}
-              onClick={handleSignInRequest}
+              onClick={handleLocalSubmit}
             >
-              Sign In
+              Sent Email
             </button>
           </div>
         </div>

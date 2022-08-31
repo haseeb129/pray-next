@@ -19,7 +19,7 @@ export function userLogin(data: object) {
 
 export function userSignUp(data: object) {
   const requestObject: ReduxInterface = {
-    method: 'GET',
+    method: 'POST',
     url: urls.userSignup(),
     data,
   };
@@ -30,14 +30,15 @@ export function userSignUp(data: object) {
   };
 }
 
-// export function forgetPassword(queryParams: string) {
-//   const requestObject: ReduxInterface = {
-//     method: 'GET',
-//     url: urls.getCustomers(queryParams),
-//   };
+export function forgetPassword(data: object) {
+  const requestObject: ReduxInterface = {
+    method: 'POST',
+    url: urls.forgetPassword(),
+    data,
+  };
 
-//   return {
-//     type: actionType.GET_CUSTOMERS,
-//     payload: newRequest(requestObject),
-//   };
-// }
+  return {
+    type: actionType.USER_FORGET_PASSWORD,
+    payload: newRequest(requestObject),
+  };
+}
