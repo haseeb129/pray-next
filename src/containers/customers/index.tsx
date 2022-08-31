@@ -112,7 +112,12 @@ class Customers extends Component<IProps, IState> {
     }
 
     if (response.value && isValidStatus(response.value.status)) {
-      toast.success('handleLocalSubmit');
+      toast.success(
+        isEditMode
+          ? 'Customer Edit Successfully'
+          : 'Customer added Successfully'
+      );
+      this.toggleModal();
       await getCustomers();
     } else {
       toast.error('Something went wrong');
@@ -160,7 +165,8 @@ class Customers extends Component<IProps, IState> {
     const response = await deleteCustomer(selectedRecord?.id);
 
     if (response.value && isValidStatus(response.value.status)) {
-      toast.success('Deleted Success');
+      toast.success('Customer Deleted Successfully ');
+      this.toggleModal();
       await getCustomers();
     } else {
       toast.error('Something went wrong');

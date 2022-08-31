@@ -1,4 +1,4 @@
-import CollapsibleTable from '@/components/collapsibleTable';
+import ComingSoon from '@/components/comingSoon';
 import DashboardHOC from '@/hoc/dashboard';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 
@@ -10,7 +10,7 @@ const users = () => {
       canonical="this is canonical "
     >
       <DashboardHOC>
-        <CollapsibleTable />
+        <ComingSoon />
       </DashboardHOC>
     </MetaTagWarpper>
   );

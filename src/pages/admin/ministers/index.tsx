@@ -1,4 +1,4 @@
-import AntD from '@/components/antD';
+import ComingSoon from '@/components/comingSoon';
 import DashboardHOC from '@/hoc/dashboard';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 
@@ -10,7 +10,7 @@ const ministers = () => {
       canonical="this is canonical "
     >
       <DashboardHOC>
-        <AntD />
+        <ComingSoon />
       </DashboardHOC>
     </MetaTagWarpper>
   );

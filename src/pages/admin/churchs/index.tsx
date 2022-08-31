@@ -1,4 +1,4 @@
-import SelectionTable from '@/components/selectionTable';
+import ComingSoon from '@/components/comingSoon';
 import DashboardHOC from '@/hoc/dashboard';
 import MetaTagWarpper from '@/hoc/metaTagWarpper';
 
@@ -10,7 +10,7 @@ const churchs = () => {
       canonical="this is canonical "
     >
       <DashboardHOC>
-        <SelectionTable />
+        <ComingSoon />
       </DashboardHOC>
     </MetaTagWarpper>
   );
