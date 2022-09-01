@@ -8,7 +8,7 @@ import { handleAuthSSR } from '@/utils/auth';
 const customers: NextPage = () => {
   return (
     <MetaTagWarpper
-      title="Customer page"
+      title="Customer"
       description="Customer page description."
       canonical="this is canonical "
     >

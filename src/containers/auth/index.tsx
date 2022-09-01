@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import type { ForgetPasswordStateInterfacr } from '@/components/auth/forgetPassword';
 import ForgetPassword from '@/components/auth/forgetPassword';
 import type { SignInStateInterfacr } from '@/components/auth/signIn';
 import SignIn from '@/components/auth/signIn';
+import type { SignUpStateInterfacr } from '@/components/auth/signUp';
 import SignUp from '@/components/auth/signUp';
 import { componentNames } from '@/helper/auth';
 import { isValidStatus } from '@/helper/common';
@@ -37,12 +39,14 @@ class Auth extends Component {
     }
   };
 
-  onSignUpUser = (data: object) => {
+  onSignUpUser = (data: SignUpStateInterfacr) => {
     console.log('Data', data);
+    if (data.password != data.confirmPassword)
+      return toast.error('Passwords not matched');
   };
 
-  onForgetPassword = async (data: object) => {
-    const { forgetPassword } = this.props;
+  onForgetPassword = async (data: ForgetPasswordStateInterfacr) => {
+    const { forgetPassword }: any = this.props;
     const response = await forgetPassword({
       username: data?.email,
     });

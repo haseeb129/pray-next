@@ -6,7 +6,7 @@ import WebHOC from '@/hoc/web';
 const forgetPassword = (props: any) => {
   return (
     <MetaTagWarpper
-      title="Customer page"
+      title="Forget Password"
       description="Customer page description."
       canonical="this is canonical "
     >

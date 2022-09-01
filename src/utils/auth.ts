@@ -6,7 +6,7 @@ import { Cookies } from 'react-cookie';
 // set up cookies
 const cookies = new Cookies();
 
-export const handleAuthSSR = async (ctx) => {
+export const handleAuthSSR = async (ctx: any) => {
   const { token } = nextCookie(ctx);
 
   const redirectOnError = () => {
@@ -31,7 +31,7 @@ export const handleAuthSSR = async (ctx) => {
   return {};
 };
 
-export const login = async ({ token }) => {
+export const login = async ({ token }: any) => {
   cookies.set('token', token, { maxAge: 60 * 60 * 24 });
   setCookie('token', token, { maxAge: 60 * 60 * 24 });
 };

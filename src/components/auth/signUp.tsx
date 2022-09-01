@@ -1,13 +1,34 @@
 import PersonPinIcon from '@mui/icons-material/PersonPin';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { inputTypes } from '@/helper/common';
 
 import CInputFiled from '../input';
 import styles from './index.module.scss';
 
-const signUpUser = (props) => {
-  const { handleChange, handleSignInRequest } = props;
+export interface SignUpStateInterfacr {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const signUpUser = (props: any) => {
+  const { onSignUpUser } = props;
+  const [info, setInfo] = useState<SignUpStateInterfacr>({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleLocalSubmit = () => {
+    onSignUpUser(info);
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setInfo({ ...info, [name]: value });
+  };
 
   return (
     <div className={styles['guest-signIn-page-wrapper']}>
@@ -22,7 +43,7 @@ const signUpUser = (props) => {
             <CInputFiled
               type={inputTypes.TEXT}
               handleChange={handleChange}
-              value={''}
+              value={info.name}
               name="name"
               label="Name"
             />
@@ -32,7 +53,7 @@ const signUpUser = (props) => {
             <CInputFiled
               type={inputTypes.EMAIL}
               handleChange={handleChange}
-              value={''}
+              value={info.email}
               name="email"
               label="Email"
             />
@@ -41,7 +62,7 @@ const signUpUser = (props) => {
             <CInputFiled
               type={inputTypes.PASSWORD}
               handleChange={handleChange}
-              value={''}
+              value={info.password}
               name="password"
               label="Password"
             />
@@ -50,7 +71,7 @@ const signUpUser = (props) => {
             <CInputFiled
               type={inputTypes.PASSWORD}
               handleChange={handleChange}
-              value={''}
+              value={info.confirmPassword}
               name="confirmPassword"
               label="Confirm Password"
             />
@@ -59,7 +80,7 @@ const signUpUser = (props) => {
           <div className="">
             <button
               className={styles['sign-up-button']}
-              onClick={handleSignInRequest}
+              onClick={handleLocalSubmit}
             >
               Sign Up
             </button>

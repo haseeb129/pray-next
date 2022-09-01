@@ -5,7 +5,7 @@ import MetaTagWarpper from '@/hoc/metaTagWarpper';
 const churchs = () => {
   return (
     <MetaTagWarpper
-      title="Customer page"
+      title="Churchs"
       description="Customer page description."
       canonical="this is canonical "
     >

@@ -6,7 +6,7 @@ import WebHOC from '@/hoc/web';
 const signUp = (props: any) => {
   return (
     <MetaTagWarpper
-      title="Customer page"
+      title="Sign Up"
       description="Customer page description."
       canonical="this is canonical "
     >
