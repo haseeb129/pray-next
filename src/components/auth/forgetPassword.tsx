@@ -27,9 +27,9 @@ const forgetPassword = (props: any) => {
   return (
     <div className={styles['guest-signIn-page-wrapper']}>
       <div className={styles['signIn-page-inner-wrapper']}>
-        <div className={styles.logo}>
+        {/* <div className={styles.logo}>
           <PersonPinIcon fontSize="large" />
-        </div>
+        </div> */}
 
         <span className={styles['heading-top']}>Forget Password</span>
         <div className="flex flex-col ">
