@@ -1,6 +1,7 @@
 import '../styles/global.css';
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../components/footer"
 
 import type { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
@@ -11,6 +12,7 @@ const MyApp = ({ Component, pageProps }: AppProps) =>
   typeof window !== undefined ? (
     <>
       <Component {...pageProps} />
+      <Footer/>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -22,6 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps) =>
         draggable
         pauseOnHover
       />
+      
     </>
   ) : (
     <>Loading</>

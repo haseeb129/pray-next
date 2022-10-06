@@ -13,6 +13,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import AdbIcon from '@mui/icons-material/Adb';
+import Link from 'next/link';
 
 import styles from './index.module.scss';
 
@@ -84,6 +86,10 @@ export default function DrawerAppBar(props: Props) {
               >
                 <MenuIcon />
               </IconButton>
+              <Link href="/">
+                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+              </Link>
+      
               <Typography
                 variant="h6"
                 component="div"
@@ -123,7 +129,7 @@ export default function DrawerAppBar(props: Props) {
         </Box>
         <Box
           component="main"
-          sx={{ p: 3 }}
+          // sx={{ p: 3 }}
           className={styles['main-component']}
         >
           {props.children}

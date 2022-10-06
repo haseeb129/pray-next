@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Link from 'next/link';
 import * as React from 'react';
+import AdbIcon from '@mui/icons-material/Adb';
 
 import { logoutExistingUser } from '@/helper/common';
 import { panelSideBar } from '@/helper/dashboard';
@@ -37,7 +38,11 @@ export default function DashboardHOC(props: Props) {
   const drawer = (
     <div className={styles.customToolbar}>
       <Toolbar className={styles.backgroundCustomColor} disableGutters={true}>
-        <span className={styles.titleClasses}>PRAY</span>
+      <Link href="/">
+      <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+      </Link>
+      
+      <span className={styles.titleClasses}>PRAY</span>
       </Toolbar>
 
       <List className={styles.sidebarstyle}>

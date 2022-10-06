@@ -108,3 +108,16 @@ html, body{
 }
 
 
+
+.footer-wrapper-class{
+  font-size: 12px;
+  text-align: center;
+  background: #d3d3d3;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+z-index: 9999;
+padding:1px 0px;
+
+}
