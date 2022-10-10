@@ -2,7 +2,7 @@ import { inputTypes } from "@/helper/common";
 
 import CInputFiled from "../input";
 
-import { Box } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { object, string, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -212,6 +212,17 @@ const RegisterPage = () => {
             <button className={styles["sign-up-button"]} type="submit">
               Sign Up
             </button>
+          </div>
+          
+          <div>
+            <p className={`${styles['forget-password']} ${styles.signUp}`}>
+              Already have an account?
+              <Link href="/auth/signIn">
+                <a>
+                  <span className="sign-up-txt"> Sign In</span>
+                </a>
+              </Link>
+            </p>
           </div>
         </div>
       </Box>

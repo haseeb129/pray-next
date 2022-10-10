@@ -20,9 +20,9 @@ a:hover {
 .content ul {
   @apply my-6;
   @apply mx-5;
-
-
 }
+
+
 
 #components-layout-demo-custom-trigger .trigger {
   padding: 0 24px;
@@ -43,7 +43,9 @@ a:hover {
 }
 
 .site-layout .site-layout-background {
-  background: #fff;
+  /* background: #fff; */
+  background: red;
+
 }
 
 
@@ -72,6 +74,8 @@ html, body{
   /* min-height: calc(100vh - 64px); */
   /* min-height: calc(100vh - 100px); */
 
+background-color: #f9f9f9
+ !important;
 
 }
 
@@ -121,3 +125,11 @@ z-index: 9999;
 padding:1px 0px;
 
 }
+.MuiFormControl-root{
+  background-color: #fff;
+}
+
+.MuiButtonBase-root.MuiButton-root{
+  color: black !important;
+  font-weight: 600;
+} 

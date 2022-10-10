@@ -30,15 +30,7 @@
     margin: 0;
   }
   
-  @media (max-width: 768px) {
-    .fullwidthInput {
-      // width: 100% !important;
-    }
-    .heading-top{
-      color: red;
-    }
-
-  }
+  
 }
 
 .inputFieldWidth{
@@ -65,8 +57,9 @@ width: 49%;
 }
 
  .sign-up-button {
-  // margin-top: 20px;
+  margin-top: 20px;
   min-width: 100%;
+  margin-bottom: 10px;
 }
 
  button.sign-up-button {
@@ -78,9 +71,9 @@ width: 49%;
   
   font-weight: 600;
   color: white;
-  background-color: #f31c23;
+  background-color: black;
   &:hover {
-    background: #cc0d14 !important;
+    background: black !important;
   }
   &:active {
     box-shadow: 0px 0px 15px #7c050559 !important;
@@ -109,9 +102,10 @@ width: 49%;
 .signUp {
   text-align: center;
   & span {
-    color: #f31c23;
+    color: black;
     font-weight: 600;
     cursor: pointer;
+    margin-left: 5px;
   }
 }
 
