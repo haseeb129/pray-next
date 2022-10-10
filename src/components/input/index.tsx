@@ -18,13 +18,12 @@ const CInputFiled = (props: any) => {
     name,
     label,
     required=false,
-    error={},
-    helperText={},
+    error=false,
+    helperText="",
     rest={},
     onSearchButtonClick = () => {},
   } = props;
 
-  console.log('Props',props)
 
   const textInput = (fieldType = 'text', placeholder = '') => {
     return (
@@ -77,6 +76,7 @@ const CInputFiled = (props: any) => {
   };
   const phoneInput = () => {
     return (
+      typeof window !== 'undefined'?
       <MuiTelInput
       {...rest}
 
@@ -90,7 +90,7 @@ const CInputFiled = (props: any) => {
         required={required}
         error={error}
         helperText={helperText}
-      />
+      />:<></>
     );
   };
 

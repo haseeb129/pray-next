@@ -60,7 +60,7 @@ export default function DrawerAppBar(props: Props) {
         <Link href="/">
           <AdbIcon />
         </Link>
-        <span style={{ ...titleClasses }}>PRAY </span>
+        <span style={{ ...titleClasses }}>PRAY</span>
       </Toolbar>
 
       <Divider />
@@ -131,7 +131,7 @@ export default function DrawerAppBar(props: Props) {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: "block", sm: "none" },
+              display: { xs: "block", sm: "none",border: "none"},
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,

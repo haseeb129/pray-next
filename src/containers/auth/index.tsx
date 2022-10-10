@@ -41,8 +41,8 @@ class Auth extends Component {
 
   onSignUpUser = (data: SignUpStateInterfacr) => {
     console.log('Data', data);
-    if (data.password != data.confirmPassword)
-      return toast.error('Passwords not matched');
+    // if (data.password != data.confirmPassword)
+    //   return toast.error('Passwords not matched');
   };
 
   onForgetPassword = async (data: ForgetPasswordStateInterfacr) => {

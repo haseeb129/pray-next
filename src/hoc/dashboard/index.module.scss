@@ -1,11 +1,4 @@
-.customToolbar {
-  div.MuiToolbar-root {
-    // background-color: #1976d2 !important;
-    background-color: white !important;
 
-    color: #000000;
-  }
-}
 
 .sidebarstyle{
   margin-top: 0px !important;
@@ -16,19 +9,19 @@
 .logoutButton{
   position: absolute;
   right: 20px;
+  color: #000000;
 }
 
 
 .titleClasses  {
   font-size: 24px;
   font-weight: 600;
-  padding-left: 25px;
-  color: #fff;
+  color: black;
 };
 
 .backgroundCustomColor{
-  // background-color: #1976d2 !important;
   background-color: white !important;
-
+  justify-content: center;
   color: #000000;
+
 }

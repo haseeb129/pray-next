@@ -39,9 +39,11 @@ const registerSchema = object({
   message: "Passwords do not match",
 });
 
-type RegisterInput = TypeOf<typeof registerschema>;
+// type RegisterInput = TypeOf<typeof registerschema>;
 
-const RegisterPage = () => {
+const RegisterPage = (props: any) => {
+  const { onSignUpUser } = props;
+
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState<SignUpStateInterfacr>({
     name: "",
@@ -72,9 +74,12 @@ const RegisterPage = () => {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<registerinput> = (values) => {
+    
     console.log(values);
+    onSignUpUser(info)
+
+
   };
-  console.log(errors);
 
   return (
     <div className={styles["guest-signIn-page-wrapper"]}>

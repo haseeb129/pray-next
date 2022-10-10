@@ -1,11 +1,11 @@
-import PersonPinIcon from '@mui/icons-material/PersonPin';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import Link from "next/link";
+import React, { useState } from "react";
 
-import { inputTypes } from '@/helper/common';
+import { inputTypes } from "@/helper/common";
 
-import CInputFiled from '../input';
-import styles from './index.module.scss';
+import CInputFiled from "../input";
+import styles from "./index.module.scss";
 
 export interface SignInStateInterfacr {
   email: string;
@@ -16,8 +16,8 @@ const signInUser = (props: any) => {
   const { onSignInUser } = props;
 
   const [info, setInfo] = useState<SignInStateInterfacr>({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleLocalSubmit = () => {
@@ -28,13 +28,13 @@ const signInUser = (props: any) => {
     setInfo({ ...info, [name]: value });
   };
   return (
-    <div className={styles['guest-signIn-page-wrapper']}>
-      <div className={styles['signIn-page-inner-wrapper']}>
+    <div className={styles["guest-signIn-page-wrapper"]}>
+      <div className={styles["signIn-page-inner-wrapper"]}>
         {/* <div className={styles.logo}>
           <PersonPinIcon fontSize="large" />
         </div> */}
 
-        <span className={styles['heading-top']}>User Sign In</span>
+        <span className={styles["heading-top"]}>User Sign In</span>
         <div className="flex flex-col ">
           <div className="py-2">
             <CInputFiled
@@ -43,6 +43,7 @@ const signInUser = (props: any) => {
               value={info.email}
               name="email"
               label="Email"
+              required              
             />
           </div>
 
@@ -53,10 +54,14 @@ const signInUser = (props: any) => {
               value={info.password}
               name="password"
               label="Password"
+              required
+              
+              
             />
+          
           </div>
-          <div className={styles['forget-pass-wrap']}>
-            <span className={styles['forget-password']}>
+          <div className={styles["forget-pass-wrap"]}>
+            <span className={styles["forget-password"]}>
               <Link href="/auth/forgetPassword">
                 <span className="sign-up-txt"> Forgot Password</span>
               </Link>
@@ -64,7 +69,7 @@ const signInUser = (props: any) => {
           </div>
           <div className="">
             <button
-              className={styles['sign-up-button']}
+              className={styles["sign-up-button"]}
               onClick={handleLocalSubmit}
             >
               Sign In
@@ -72,7 +77,7 @@ const signInUser = (props: any) => {
           </div>
 
           <div>
-            <p className={`${styles['forget-password']} ${styles.signUp}`}>
+            <p className={`${styles["forget-password"]} ${styles.signUp}`}>
               Don't have an account?
               <Link href="/auth/signUp">
                 <a>
