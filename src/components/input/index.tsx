@@ -7,6 +7,7 @@ import { MuiTelInput } from 'mui-tel-input';
 import React from 'react';
 
 import { inputTypes } from '@/helper/common';
+import { type } from 'os';
 
 const CInputFiled = (props: any) => {
   const {
@@ -16,12 +17,19 @@ const CInputFiled = (props: any) => {
     size = 'small',
     name,
     label,
+    required=false,
+    error={},
+    helperText={},
+    rest={},
     onSearchButtonClick = () => {},
   } = props;
+
+  console.log('Props',props)
 
   const textInput = (fieldType = 'text', placeholder = '') => {
     return (
       <TextField
+      {...rest}
         variant="outlined"
         label={label}
         value={value}
@@ -33,6 +41,9 @@ const CInputFiled = (props: any) => {
         name={name}
         type={fieldType}
         placeholder={placeholder}
+        required={required}
+        error={error}
+        helperText={helperText}
       />
     );
   };
