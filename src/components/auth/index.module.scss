@@ -12,6 +12,41 @@
   margin: auto;
   padding-left: 20px;
   padding-right: 20px;
+
+  p{
+    margin: 0;
+  }
+}
+
+
+.signup-page-inner-wrapper {
+  width:100%;
+  max-width: 800px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  p{
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .fullwidthInput {
+      // width: 100% !important;
+    }
+    .heading-top{
+      color: red;
+    }
+
+  }
+}
+
+.inputFieldWidth{
+width: 49%;
+@media (max-width: 768px) {
+  width: 100%
+
+}
 }
 
 .forget-pass-wrap {

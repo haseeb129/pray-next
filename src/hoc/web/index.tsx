@@ -43,6 +43,7 @@ export default function DrawerAppBar(props: Props) {
   const classesss = {
     backgroundColor: '#1976d2',
     justifyContent: 'center',
+    color:"#fff",
   };
 
   const classes1 = {
@@ -52,7 +53,10 @@ export default function DrawerAppBar(props: Props) {
   const drawer = (
     <div onClick={handleDrawerToggle}>
       <Toolbar style={{ ...classesss }} disableGutters={true}>
-        <span style={{ ...titleClasses }}>PRAY</span>
+      <Link href="/">
+                <AdbIcon  />
+              </Link>
+        <span style={{ ...titleClasses }}>PRAY </span>
       </Toolbar>
 
       <Divider />
@@ -87,7 +91,7 @@ export default function DrawerAppBar(props: Props) {
                 <MenuIcon />
               </IconButton>
               <Link href="/">
-                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                <AdbIcon sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} />
               </Link>
       
               <Typography

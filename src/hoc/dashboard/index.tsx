@@ -83,6 +83,9 @@ export default function DashboardHOC(props: Props) {
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
+            <Link href="/">
+      <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+      </Link>
             <span className={styles.titleClasses}>PRAY</span>
           </IconButton>
 

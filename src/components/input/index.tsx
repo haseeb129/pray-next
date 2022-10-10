@@ -78,6 +78,8 @@ const CInputFiled = (props: any) => {
   const phoneInput = () => {
     return (
       <MuiTelInput
+      {...rest}
+
         variant="outlined"
         defaultCountry="FR"
         label={label}
@@ -85,6 +87,9 @@ const CInputFiled = (props: any) => {
         onChange={(newValue) => handleChange([name], newValue)}
         fullWidth={true}
         size={size}
+        required={required}
+        error={error}
+        helperText={helperText}
       />
     );
   };
