@@ -1,28 +1,28 @@
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import type { TablePaginationConfig } from 'antd';
-import type { FilterValue, SorterResult } from 'antd/lib/table/interface';
-import _ from 'lodash';
-import { withRouter } from 'next/router';
-import qs from 'qs';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import type { TablePaginationConfig } from "antd";
+import type { FilterValue, SorterResult } from "antd/lib/table/interface";
+import _ from "lodash";
+import { withRouter } from "next/router";
+import qs from "qs";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
-import AddCustomer from '@/components/addCustomer';
-import DataTable from '@/components/dataTable';
-import { getModal } from '@/components/dialogBoxes';
-import DeleteDialog from '@/components/dialogBoxes/deleteDialog';
-import SeachAndButtonContainer from '@/components/seachFieldAndButton';
-import { inputTypes, isValidStatus, modalNames } from '@/helper/common';
-import type { DataType, Params } from '@/helper/customers/customerTableHelper';
-import { columnsGenerator } from '@/helper/customers/customerTableHelper';
-import ExpandableComponent from '@/helper/customers/helper';
+import AddCustomer from "@/components/addCustomer";
+import DataTable from "@/components/dataTable";
+import { getModal } from "@/components/dialogBoxes";
+import DeleteDialog from "@/components/dialogBoxes/deleteDialog";
+import SeachAndButtonContainer from "@/components/seachFieldAndButton";
+import { inputTypes, isValidStatus, modalNames, orderConstants } from "@/helper/common";
+import { DataType, filterByValue, Params } from "@/helper/customers/customerTableHelper";
+import { columnsGenerator } from "@/helper/customers/customerTableHelper";
+import ExpandableComponent from "@/helper/customers/helper";
 import {
   addCustomer,
   deleteCustomer,
   editCustomer,
   getCustomers,
-} from '@/redux/customers/actions';
+} from "@/redux/customers/actions";
 
 interface IProps {
   addCustomer: any;
@@ -36,9 +36,11 @@ interface IState {
   pagination: any;
   tempLoading: Boolean;
   data: any;
-  search: '';
+  search: "";
   selectedRecord: any;
   modalName: string;
+  cutomersRecords: any;
+  sortOptions: any;
 }
 
 class Customers extends Component<IProps, IState> {
@@ -46,16 +48,24 @@ class Customers extends Component<IProps, IState> {
     super(props);
     this.state = {
       isModalOpen: false,
-      modalName: '',
+      modalName: "",
       pagination: {
         current: 1,
-        pageSize: 10,
+        pageSize: 4,
       },
       tempLoading: false,
       data: null,
-      search: '',
+      search: "",
       selectedRecord: {},
+      cutomersRecords: props?.customers?.result,
+      sortOptions: {},
     };
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps: any) {
+    if (this.props?.customers?.result !== nextProps?.customers?.result) {
+      this.setState({ cutomersRecords: nextProps?.customers?.result });
+    }
   }
 
   async componentDidMount() {
@@ -66,7 +76,7 @@ class Customers extends Component<IProps, IState> {
     // this.fetchData(this.state.pagination);
   }
 
-  toggleModal = (selectedRecord = {}, modalName = '') => {
+  toggleModal = (selectedRecord = {}, modalName = "") => {
     const { isModalOpen } = this.state;
     this.setState({
       selectedRecord,
@@ -78,7 +88,6 @@ class Customers extends Component<IProps, IState> {
   onAddCustomer = async (data: object, isEditMode: boolean = false) => {
     const { addCustomer, editCustomer, getCustomers }: any = this.props;
     const { selectedRecord }: any = this.state;
-    // console.log('isEditMode', isEditMode);
 
     const formattedData: any = {
       customer: {
@@ -86,14 +95,14 @@ class Customers extends Component<IProps, IState> {
         email: data.email,
         phone: data.phone,
         mobilePhone: data.mobilePhone,
-        registeredNumber: '95397443000174',
+        registeredNumber: "95397443000174",
       },
       user: {
         name: data.name,
         email: data.email,
         username: data.email,
         phone: data.phone,
-        password: '123456123',
+        password: "123456123",
       },
     };
 
@@ -114,13 +123,13 @@ class Customers extends Component<IProps, IState> {
     if (response.value && isValidStatus(response.value.status)) {
       toast.success(
         isEditMode
-          ? 'Customer Edit Successfully'
-          : 'Customer added Successfully'
+          ? "Customer Edit Successfully"
+          : "Customer added Successfully"
       );
       this.toggleModal();
       await getCustomers();
     } else {
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     }
   };
 
@@ -149,10 +158,15 @@ class Customers extends Component<IProps, IState> {
     this.setState({ [name]: value });
   };
 
+  
+
   onSearchButtonClick = () => {
-    console.log('onSearchButtonClick');
-    // this.setState({ selectedRecord: record }, this.toggleModal);
-    // this.toggleModal(record);
+    const filteredArray = filterByValue(
+      this?.props?.customers?.result,
+      this.state.search
+    );
+    this.setState({ cutomersRecords: filteredArray },()=>this.onTableChange());
+
   };
 
   onDeleteClick = (record: object) => {
@@ -165,11 +179,11 @@ class Customers extends Component<IProps, IState> {
     const response = await deleteCustomer(selectedRecord?.id);
 
     if (response.value && isValidStatus(response.value.status)) {
-      toast.success('Customer Deleted Successfully ');
+      toast.success("Customer Deleted Successfully ");
       this.toggleModal();
       await getCustomers();
     } else {
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     }
   };
 
@@ -179,7 +193,7 @@ class Customers extends Component<IProps, IState> {
         return {
           isOpen: this.state.isModalOpen,
           toggleModal: () => this.toggleModal(),
-          title: 'Add Customer',
+          title: "Add Customer",
           Icon: <PersonAddAlt1Icon fontSize="medium" />,
           childernComponent: (
             <AddCustomer
@@ -194,7 +208,7 @@ class Customers extends Component<IProps, IState> {
         return {
           isOpen: this.state.isModalOpen,
           toggleModal: () => this.toggleModal(),
-          title: 'Delete',
+          title: "Delete",
           childernComponent: (
             <DeleteDialog
               confirmFunction={this.onDeleteConfirm}
@@ -208,6 +222,34 @@ class Customers extends Component<IProps, IState> {
     }
   };
 
+  onTableChange = (params: any={}) => {
+    const { cutomersRecords, sortOptions } = this.state;
+    let updatedSortOptions = { ...sortOptions };
+    if (params?.sortOrder === undefined) {
+      delete updatedSortOptions[params?.sortField];
+    } else {
+      updatedSortOptions = {
+        ...sortOptions,
+        [params?.sortField]: params?.sortOrder,
+      };
+    }
+  
+
+    const orderArray = Object.values(updatedSortOptions).map(
+      (item) => orderConstants[item]
+    );
+
+    const orderedData = _.orderBy(
+      cutomersRecords,
+      Object.keys(updatedSortOptions),
+      orderArray
+    );
+    this.setState({ sortOptions: updatedSortOptions ,
+      cutomersRecords:orderedData
+    });
+  };
+  
+  
   render(): React.ReactNode {
     const { isModalOpen, modalName } = this.state;
     return (
@@ -218,17 +260,17 @@ class Customers extends Component<IProps, IState> {
           inputValue={this.state.search}
           inputName="search"
           inputLabel="Search"
-          buttonLabel={'Add Cutomer'}
+          buttonLabel={"Add Cutomer"}
           buttonIcon={<PersonAddAlt1Icon />}
           buttonOnClick={() => this.toggleModal({}, modalNames.ADD_CUSTOMER)}
           onSearchButtonClick={this.onSearchButtonClick}
         />
         <DataTable
           columns={columnsGenerator(this.toggleModal, this.onDeleteClick)}
-          data={this?.props?.customers?.result || []}
+          data={this?.state?.cutomersRecords || []}
           loading={this?.props?.loading || this.state.tempLoading || false}
           pagination={{ total: this?.props?.customers?.count }}
-          onTableChange={() => {}}
+          onTableChange={this.onTableChange}
           ExpandableComponent={ExpandableComponent}
           onEdit={this.toggleModal}
         />

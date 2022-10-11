@@ -80,3 +80,8 @@ export const getAccessToken = () => {
     return token;
   }
 };
+
+export const orderConstants = {
+  ascend: "asc",
+  descend: "desc",
+};

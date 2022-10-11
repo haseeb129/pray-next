@@ -134,3 +134,11 @@ padding:1px 0px;
   color: black !important;
   font-weight: 600;
 } 
+.ant-pagination-item-link{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.anticon{
+  color: black !important;
+}

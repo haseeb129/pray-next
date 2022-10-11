@@ -50,7 +50,7 @@ export const columnsGenerator = (onEdit: any, onDelete: any) => {
       title: 'Name',
       dataIndex: 'name',
       sorter: true,
-      sortDirections: ['ascend', 'descend', 'ascend'],
+      // sortDirections: ['ascend', 'descend', 'ascend'],
       ellipsis: {
         showTitle: false,
       },
@@ -101,3 +101,11 @@ export interface Params {
   sortOrder?: string;
   search?: string;
 }
+
+export const filterByValue = (array, string) => {
+  return array.filter((o) =>
+    Object.keys(o).some((k) =>
+      o[k].toLowerCase().includes(string.toLowerCase())
+    )
+  );
+};
