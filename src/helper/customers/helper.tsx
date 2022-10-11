@@ -5,6 +5,8 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import _ from 'lodash';
 import * as React from 'react';
+import { EditFilled  } from '@ant-design/icons';
+
 
 import CButton from '@/components/button';
 
@@ -48,6 +50,7 @@ const expandableComponent = ({ data, onEdit }) => {
                 variant="outlined"
                 onClick={onEdit}
                 className="mt-3"
+                icon={<EditFilled style={{ fontSize: '16px'}}/>}
               />
             </TableCell>
           </TableRow>
