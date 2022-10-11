@@ -12,7 +12,6 @@ const MyApp = ({ Component, pageProps }: AppProps) =>
   typeof window !== undefined ? (
     <>
       <Component {...pageProps} />
-      <Footer/>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -24,7 +23,7 @@ const MyApp = ({ Component, pageProps }: AppProps) =>
         draggable
         pauseOnHover
       />
-      
+      <Footer/>
     </>
   ) : (
     <>Loading</>
