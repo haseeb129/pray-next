@@ -19,6 +19,9 @@ import {
   userSignUp,
 } from '../../redux/auth/actions';
 
+import {addCustomer} from '../../redux/customers/actions';
+
+
 class Auth extends Component {
   onSignInUser = async (data: SignInStateInterfacr) => {
     const { userLogin } = this.props;
@@ -39,8 +42,37 @@ class Auth extends Component {
     }
   };
 
-  onSignUpUser = (data: SignUpStateInterfacr) => {
-    console.log('Data', data);
+  onSignUpUser = async(data: any={}) => {
+    const { addCustomer,  }: any = this.props;
+
+    const formattedData: any = {
+      customer: {
+        name: data?.name,
+        email: data?.email,
+        phone: data?.phoneNumber,
+        mobilePhone: data?.mobileNumber,
+        registeredNumber: data?.registeredNumber,
+      },
+      user: {
+        name: data?.name,
+        email: data?.email,
+        username: data?.email,
+        phone: data?.phoneNumber,
+        password: data?.password,
+      },
+    };
+
+    const response = await addCustomer({
+      ...formattedData,
+    });
+    if (response.value && isValidStatus(response.value.status)) {
+      toast.success(
+        "Customer added Successfully"
+      );
+      //redirect
+    } else {
+      toast.error("Something went wrong");
+    }
     // if (data.password != data.confirmPassword)
     //   return toast.error('Passwords not matched');
   };
@@ -95,6 +127,8 @@ const mapDispatchToProps = {
   userLogin,
   userSignUp,
   forgetPassword,
+  addCustomer,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Auth));

@@ -26,8 +26,8 @@ const registerSchema = object({
       new RegExp(/^[0-9]+$/),
       "Registered Number must contain numbers only"
     )
-    .min(8, "Registered Number must be more than 8 characters")
-    .max(32, "Registered Number must be less than 32 characters"),
+    .min(14, "Registered Number must have 14 characters")
+    .max(14, "Registered Number must have 14 characters"),
   phoneNumber: string()
     .nonempty("Phone Number is required")
     .min(8, "Phone Number must be more than 8 characters"),
