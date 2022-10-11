@@ -6,9 +6,9 @@ import type { TablePaginationConfig } from 'antd/es/table';
 import type { SorterResult } from 'antd/es/table/interface';
 import type { ColumnsType } from 'antd/lib/table';
 import React from 'react';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import { modalNames } from '../common';
-
+import { EditFilled  } from '@ant-design/icons';
 export interface DataType {
   name: {
     first: string;
@@ -35,9 +35,10 @@ const menu = (record: any, onEdit: any, onDelete: any) => (
       else onDelete(record);
     }}
     items={[
-      { key: optionConstants.EDIT, label: optionConstants.EDIT },
-      { key: optionConstants.DELETE, label: optionConstants.DELETE },
+      { key: optionConstants.EDIT, label: optionConstants.EDIT,icon:<EditFilled style={{ fontSize: '16px'}}/> },
+      { key: optionConstants.DELETE, label: optionConstants.DELETE,icon:<DeleteIcon style={{ fontSize: '16px'}}/> },
     ]}
+    
   />
 );
 
