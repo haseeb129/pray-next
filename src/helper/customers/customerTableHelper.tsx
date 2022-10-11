@@ -58,17 +58,18 @@ export const columnsGenerator = (onEdit: any, onDelete: any) => {
       render: (name: string) => `${name || '--'}`,
     },
 
-    {
-      title: 'Gender',
-      dataIndex: 'gender',
-      sorter: true,
-      width: '20%',
-      render: (genderValue: string) => `${genderValue || '--'}`,
-    },
+    // {
+    //   title: 'Gender',
+    //   dataIndex: 'gender',
+    //   sorter: true,
+    //   width: '20%',
+    //   render: (genderValue: string) => `${genderValue || '--'}`,
+    // },
     {
       title: 'Email',
       ellipsis: true,
       dataIndex: 'email',
+
       render: (email: string) => `${email || '--'}`,
       colSpan: 1,
     },

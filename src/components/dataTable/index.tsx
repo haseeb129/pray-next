@@ -29,6 +29,7 @@ const DataTable: any = ({
   onEdit,
   ExpandableComponent,
 }: CommonTableProps) => {
+  
   const handleTableChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue>,
@@ -38,7 +39,7 @@ const DataTable: any = ({
       sortField: sorter.field as string,
       sortOrder: sorter.order as string,
       pagination,
-
+      sorter,
       ...filters,
     });
   };

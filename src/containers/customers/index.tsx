@@ -51,7 +51,7 @@ class Customers extends Component<IProps, IState> {
       modalName: "",
       pagination: {
         current: 1,
-        pageSize: 4,
+        pageSize: 5,
       },
       tempLoading: false,
       data: null,
@@ -110,7 +110,7 @@ class Customers extends Component<IProps, IState> {
     if (isEditMode) {
       response = await editCustomer(
         {
-          ...formattedData,
+          customer:{...formattedData?.customer},
         },
         selectedRecord?.id
       );
@@ -269,7 +269,7 @@ class Customers extends Component<IProps, IState> {
           columns={columnsGenerator(this.toggleModal, this.onDeleteClick)}
           data={this?.state?.cutomersRecords || []}
           loading={this?.props?.loading || this.state.tempLoading || false}
-          pagination={{ total: this?.props?.customers?.count }}
+          pagination={{ total: this?.props?.customers?.count ,pageSize:5}}
           onTableChange={this.onTableChange}
           ExpandableComponent={ExpandableComponent}
           onEdit={this.toggleModal}
